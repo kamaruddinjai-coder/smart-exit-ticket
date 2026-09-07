@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Kelas Saya | Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+
+    <!-- BRAND -->
+
+    <a
+      href="dashboard.html"
+      class="brand"
+    >
+
+      <span class="brand-logo">
+        ✓
+      </span>
+
+      <span>
+
+        <strong data-i18n="app.name">
+          Smart Exit Ticket
+        </strong>
+
+        <small data-i18n="app.lecturerPortal">
+          Portal Pensyarah
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <!-- =================================================
+         LANGUAGE SWITCHER
+    ================================================== -->
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFIL PENSYARAH
+    ================================================== -->
+
+    <div class="lecturer-profile">
+
+      <img
+        id="profilePhoto"
+        class="profile-photo"
+        src=""
+        alt="Gambar profil Pensyarah"
+      >
+
+      <div class="profile-details">
+
+        <strong id="lecturerName">
+          Pensyarah
+        </strong>
+
+        <small id="lecturerEmail">
+        </small>
+
+      </div>
+
+      <button
+        type="button"
+        id="logoutBtn"
+        class="logout-button"
+        data-i18n="nav.logout"
+      >
+        Log Keluar
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       LAYOUT
+  ====================================================== -->
+
+  <div class="dashboard-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+      <nav class="sidebar-menu">
+
+
+        <a
+          href="dashboard.html"
+          class="menu-link"
+          data-i18n="nav.dashboard"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="classes.html"
+          class="menu-link active"
+          data-i18n="nav.classes"
+        >
+          Kelas Saya
+        </a>
+
+
+        <a
+          href="create-session.html"
+          class="menu-link"
+          data-i18n="nav.createSession"
+        >
+          Cipta Sesi
+        </a>
+
+
+        <a
+          href="manage-sessions.html"
+          class="menu-link"
+          data-i18n="nav.manageSessions"
+        >
+          Pengurusan Sesi
+        </a>
+
+
+        <a
+          href="responses.html"
+          class="menu-link"
+          data-i18n="nav.responses"
+        >
+          Respons dan Analisis
+        </a>
+
+
+      </nav>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="dashboard-main">
+
+
+      <!-- =================================================
+           TAJUK HALAMAN
+      ================================================== -->
+
+      <section class="page-heading">
+
+
+        <div>
+
+          <p
+            class="section-label"
+            data-i18n="classes.label"
+          >
+            PENGURUSAN KELAS
+          </p>
+
+
+          <h1 data-i18n="classes.title">
+            Kelas Saya
+          </h1>
+
+
+          <p data-i18n="classes.description">
+            Urus kelas yang digunakan untuk sesi Exit Ticket.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="showClassFormBtn"
+          class="primary-button"
+          data-i18n="classes.addClass"
+        >
+          + Tambah Kelas
+        </button>
+
+
+      </section>
+
+
+      <!-- =================================================
+           MESEJ
+      ================================================== -->
+
+      <div
+        id="classMessage"
+        class="message"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+
+      <!-- =================================================
+           BORANG TAMBAH / EDIT KELAS
+      ================================================== -->
+
+      <section
+        id="classFormPanel"
+        class="form-panel hidden"
+      >
+
+        <div class="form-section-heading">
+
+          <span class="section-number">
+            1
+          </span>
+
+          <div>
+
+            <h2
+              id="classFormTitle"
+              data-i18n="classes.formAddTitle"
+            >
+              Tambah Kelas
+            </h2>
+
+            <p data-i18n="classes.formDescription">
+              Masukkan maklumat kelas yang akan digunakan dalam sesi Exit Ticket.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <form id="classForm">
+
+          <input
+            type="hidden"
+            id="editingClassId"
+          >
+
+
+          <div class="form-grid">
+
+
+            <!-- NAMA KELAS -->
+
+            <div class="form-group">
+
+              <label
+                for="className"
+                data-i18n="classes.className"
+              >
+                Nama Kelas
+              </label>
+
+              <input
+                type="text"
+                id="className"
+                maxlength="100"
+                required
+                placeholder="Contoh: D2T2"
+                data-i18n-placeholder="classes.classNamePlaceholder"
+              >
+
+            </div>
+
+
+            <!-- KOD KURSUS -->
+
+            <div class="form-group">
+
+              <label
+                for="courseCode"
+                data-i18n="classes.courseCode"
+              >
+                Kod Kursus
+              </label>
+
+              <input
+                type="text"
+                id="courseCode"
+                maxlength="30"
+                required
+                placeholder="Contoh: DC014"
+                data-i18n-placeholder="classes.courseCodePlaceholder"
+              >
+
+            </div>
+
+
+            <!-- NAMA KURSUS -->
+
+            <div class="form-group full-width">
+
+              <label
+                for="courseName"
+                data-i18n="classes.courseName"
+              >
+                Nama Kursus
+              </label>
+
+              <input
+                type="text"
+                id="courseName"
+                maxlength="150"
+                required
+                placeholder="Contoh: Computer Science 1"
+                data-i18n-placeholder="classes.courseNamePlaceholder"
+              >
+
+            </div>
+
+
+            <!-- STATUS KELAS -->
+
+            <div class="form-group full-width">
+
+              <label
+                for="classStatus"
+                data-i18n="classes.classStatus"
+              >
+                Status Kelas
+              </label>
+
+              <select
+                id="classStatus"
+                required
+              >
+
+                <option
+                  value="active"
+                  data-i18n="classes.statusActive"
+                >
+                  Aktif
+                </option>
+
+                <option
+                  value="inactive"
+                  data-i18n="classes.statusInactive"
+                >
+                  Tidak Aktif
+                </option>
+
+              </select>
+
+              <small
+                class="field-help"
+                data-i18n="classes.statusHelp"
+              >
+                Kelas tidak aktif tidak akan dipaparkan semasa mencipta sesi baharu.
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <!-- ACTIONS -->
+
+          <div class="session-form-actions">
+
+            <button
+              type="button"
+              id="cancelClassBtn"
+              class="secondary-button"
+              data-i18n="common.cancel"
+            >
+              Batal
+            </button>
+
+            <button
+              type="submit"
+              id="saveClassBtn"
+              class="primary-button"
+              data-i18n="classes.saveClass"
+            >
+              Simpan Kelas
+            </button>
+
+          </div>
+
+        </form>
+
+      </section>
+
+
+      <!-- =================================================
+           RINGKASAN KELAS
+      ================================================== -->
+
+      <section class="response-summary-grid">
+
+        <article class="summary-card">
+
+          <div class="summary-icon">
+            K
+          </div>
+
+          <div>
+
+            <span data-i18n="classes.totalClasses">
+              Jumlah Kelas
+            </span>
+
+            <strong id="totalClassCount">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <article class="summary-card">
+
+          <div class="summary-icon">
+            A
+          </div>
+
+          <div>
+
+            <span data-i18n="classes.activeClasses">
+              Kelas Aktif
+            </span>
+
+            <strong id="activeClassCount">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <article class="summary-card">
+
+          <div class="summary-icon">
+            T
+          </div>
+
+          <div>
+
+            <span data-i18n="classes.inactiveClasses">
+              Tidak Aktif
+            </span>
+
+            <strong id="inactiveClassCount">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- =================================================
+           SENARAI KELAS
+      ================================================== -->
+
+      <section class="form-panel">
+
+        <div class="form-section-heading">
+
+          <span class="section-number">
+            2
+          </span>
+
+          <div>
+
+            <h2 data-i18n="classes.classList">
+              Senarai Kelas
+            </h2>
+
+            <p data-i18n="classes.classListDescription">
+              Lihat, edit atau padam kelas yang telah dicipta.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+          id="classesLoading"
+          class="student-status-card"
+        >
+
+          <div class="status-spinner"></div>
+
+          <h3 data-i18n="classes.loading">
+            Sedang mendapatkan kelas
+          </h3>
+
+          <p data-i18n="common.loading">
+            Sedang memuatkan...
+          </p>
+
+        </div>
+
+
+        <!-- TIADA KELAS -->
+
+        <div
+          id="noClassesPanel"
+          class="student-status-card hidden"
+        >
+
+          <div class="status-icon">
+            K
+          </div>
+
+          <h3 data-i18n="classes.noClasses">
+            Belum ada kelas
+          </h3>
+
+          <p data-i18n="classes.noClassesDescription">
+            Tambah kelas pertama untuk mula mencipta sesi Exit Ticket.
+          </p>
+
+        </div>
+
+
+        <!-- LIST -->
+
+        <div
+          id="classList"
+          class="class-list"
+        ></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT UTAMA
+  ====================================================== -->
+
+  <script
+    type="module"
+    src="js/classes.js"
+  ></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>

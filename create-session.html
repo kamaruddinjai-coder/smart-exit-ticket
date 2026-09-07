@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Cipta Sesi | Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+
+    <!-- BRAND -->
+
+    <a
+      href="dashboard.html"
+      class="brand"
+    >
+
+      <span class="brand-logo">
+        ✓
+      </span>
+
+      <span>
+
+        <strong data-i18n="app.name">
+          Smart Exit Ticket
+        </strong>
+
+        <small data-i18n="app.lecturerPortal">
+          Portal Pensyarah
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <!-- =================================================
+         LANGUAGE SWITCHER
+    ================================================== -->
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFIL PENSYARAH
+    ================================================== -->
+
+    <div class="lecturer-profile">
+
+      <img
+        id="profilePhoto"
+        class="profile-photo"
+        src=""
+        alt="Gambar profil Pensyarah"
+      >
+
+      <div class="profile-details">
+
+        <strong id="lecturerName">
+          Pensyarah
+        </strong>
+
+        <small id="lecturerEmail">
+        </small>
+
+      </div>
+
+      <button
+        type="button"
+        id="logoutBtn"
+        class="logout-button"
+        data-i18n="nav.logout"
+      >
+        Log Keluar
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       LAYOUT
+  ====================================================== -->
+
+  <div class="dashboard-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+      <nav class="sidebar-menu">
+
+
+        <a
+          href="dashboard.html"
+          class="menu-link"
+          data-i18n="nav.dashboard"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="classes.html"
+          class="menu-link"
+          data-i18n="nav.classes"
+        >
+          Kelas Saya
+        </a>
+
+
+        <a
+          href="create-session.html"
+          class="menu-link active"
+          data-i18n="nav.createSession"
+        >
+          Cipta Sesi
+        </a>
+
+
+        <a
+          href="manage-sessions.html"
+          class="menu-link"
+          data-i18n="nav.manageSessions"
+        >
+          Pengurusan Sesi
+        </a>
+
+
+        <a
+          href="responses.html"
+          class="menu-link"
+          data-i18n="nav.responses"
+        >
+          Respons dan Analisis
+        </a>
+
+
+      </nav>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="dashboard-main">
+
+
+      <!-- =================================================
+           TAJUK HALAMAN
+      ================================================== -->
+
+      <section class="page-heading">
+
+        <div>
+
+          <p
+            class="section-label"
+            data-i18n="createSession.label"
+          >
+            EXIT TICKET
+          </p>
+
+          <h1 data-i18n="createSession.title">
+            Cipta Sesi Baharu
+          </h1>
+
+          <p data-i18n="createSession.description">
+            Tetapkan kelas, topik dan soalan
+            sebelum berkongsi pautan dengan pelajar.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           BORANG SESI
+      ================================================== -->
+
+      <form
+        id="sessionForm"
+        class="session-form"
+      >
+
+
+        <!-- =================================================
+             1. MAKLUMAT KELAS
+        ================================================== -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              1
+            </span>
+
+            <div>
+
+              <h2 data-i18n="createSession.classInfo">
+                Maklumat Kelas
+              </h2>
+
+              <p data-i18n="createSession.classInfoDescription">
+                Pilih kelas untuk sesi ini.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group full-width">
+
+              <label
+                for="classSelect"
+                data-i18n="createSession.classLabel"
+              >
+                Kelas
+              </label>
+
+
+              <select
+                id="classSelect"
+                required
+              >
+
+                <option
+                  value=""
+                  data-i18n="createSession.selectClass"
+                >
+                  Pilih kelas
+                </option>
+
+              </select>
+
+
+              <small
+                id="selectedCourseInfo"
+                class="field-help"
+                data-i18n="createSession.courseInfoHelp"
+              >
+                Kod dan nama kursus akan diambil
+                daripada kelas yang dipilih.
+              </small>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             2. TOPIK PEMBELAJARAN
+        ================================================== -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              2
+            </span>
+
+            <div>
+
+              <h2 data-i18n="createSession.topicSection">
+                Topik Pembelajaran
+              </h2>
+
+              <p data-i18n="createSession.topicDescription">
+                Nyatakan topik dan subtopik yang
+                telah dipelajari.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+
+            <!-- TOPIK -->
+
+            <div class="form-group full-width">
+
+              <label
+                for="topic"
+                data-i18n="createSession.topic"
+              >
+                Topik
+              </label>
+
+              <input
+                type="text"
+                id="topic"
+                maxlength="150"
+                required
+                placeholder="Contoh: Fundamental of Database System"
+                data-i18n-placeholder="createSession.topicPlaceholder"
+              >
+
+            </div>
+
+
+            <!-- SUBTOPIK -->
+
+            <div class="form-group full-width">
+
+              <div class="field-heading">
+
+                <label data-i18n="createSession.subtopic">
+                  Subtopik
+                </label>
+
+                <button
+                  type="button"
+                  id="addSubtopicBtn"
+                  class="text-button"
+                  data-i18n="createSession.addSubtopic"
+                >
+                  + Tambah Subtopik
+                </button>
+
+              </div>
+
+
+              <div
+                id="subtopicContainer"
+                class="dynamic-fields"
+              >
+
+                <div class="dynamic-field">
+
+                  <input
+                    type="text"
+                    class="subtopic-input"
+                    maxlength="150"
+                    required
+                    placeholder="Contoh: Data Integrity"
+                    data-i18n-placeholder="createSession.subtopicPlaceholder"
+                  >
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             3. SOALAN PENSYARAH
+        ================================================== -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              3
+            </span>
+
+            <div>
+
+              <h2 data-i18n="createSession.questionsSection">
+                Soalan Pensyarah
+              </h2>
+
+              <p data-i18n="createSession.questionsDescription">
+                Tambahkan soalan ringkas untuk
+                dijawab oleh pelajar.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group full-width">
+
+            <div class="field-heading">
+
+              <label data-i18n="createSession.additionalQuestion">
+                Soalan Tambahan
+              </label>
+
+              <button
+                type="button"
+                id="addQuestionBtn"
+                class="text-button"
+                data-i18n="createSession.addQuestion"
+              >
+                + Tambah Soalan
+              </button>
+
+            </div>
+
+
+            <div
+              id="questionContainer"
+              class="dynamic-fields"
+            >
+
+              <div class="dynamic-field">
+
+                <textarea
+                  class="question-input"
+                  maxlength="300"
+                  required
+                  placeholder="Contoh: Terangkan maksud data integrity."
+                  data-i18n-placeholder="createSession.questionPlaceholder"
+                ></textarea>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="information-note"
+            data-i18n="createSession.systemQuestionsInfo"
+          >
+            Sistem juga akan bertanya tahap kefahaman,
+            perkara yang telah difahami dan perkara
+            yang masih belum difahami.
+          </p>
+
+        </section>
+
+
+        <!-- =================================================
+             4. STATUS SESI
+        ================================================== -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              4
+            </span>
+
+            <div>
+
+              <h2 data-i18n="createSession.sessionStatus">
+                Status Sesi
+              </h2>
+
+              <p data-i18n="createSession.statusDescription">
+                Tentukan sama ada sesi boleh dijawab
+                oleh Pelajar.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group full-width">
+
+              <label
+                for="sessionStatus"
+                data-i18n="createSession.sessionStatus"
+              >
+                Status Sesi
+              </label>
+
+
+              <select
+                id="sessionStatus"
+                required
+              >
+
+                <option
+                  value="active"
+                  data-i18n="createSession.statusActive"
+                >
+                  Aktif — Pelajar boleh menjawab
+                </option>
+
+                <option
+                  value="draft"
+                  data-i18n="createSession.statusDraft"
+                >
+                  Draf — belum dibuka kepada Pelajar
+                </option>
+
+              </select>
+
+
+              <small
+                class="field-help"
+                data-i18n="createSession.statusHelp"
+              >
+                Sesi aktif boleh dijawab sebaik sahaja
+                pautan atau kod QR dikongsikan.
+                Tutup sesi selepas semua Pelajar
+                selesai menjawab.
+              </small>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MESEJ
+        ================================================== -->
+
+        <div
+          id="sessionFormMessage"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="session-form-actions">
+
+          <button
+            type="reset"
+            id="resetSessionBtn"
+            class="secondary-button"
+            data-i18n="createSession.clearButton"
+          >
+            Kosongkan Borang
+          </button>
+
+          <button
+            type="submit"
+            id="saveSessionBtn"
+            class="primary-button"
+            data-i18n="createSession.createButton"
+          >
+            Cipta Sesi
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <!-- =================================================
+           HASIL SESI
+      ================================================== -->
+
+      <section
+        id="sessionResult"
+        class="result-panel hidden"
+      >
+
+        <div class="result-icon">
+          ✓
+        </div>
+
+
+        <div class="result-content">
+
+          <p
+            class="section-label"
+            data-i18n="createSession.successLabel"
+          >
+            SESI BERJAYA DICIPTA
+          </p>
+
+
+          <h2 data-i18n="createSession.studentLinkTitle">
+            Pautan Exit Ticket Pelajar
+          </h2>
+
+
+          <p data-i18n="createSession.studentLinkDescription">
+            Kongsi pautan ini dengan pelajar
+            melalui Google Classroom atau kod QR.
+          </p>
+
+
+          <!-- KOD SESI -->
+
+          <div class="session-code-box">
+
+            <span data-i18n="createSession.sessionCode">
+              Kod Sesi
+            </span>
+
+            <strong id="sessionCodeDisplay">
+              -
+            </strong>
+
+          </div>
+
+
+          <!-- PAUTAN -->
+
+          <div class="link-copy-group">
+
+            <input
+              type="text"
+              id="studentSessionLink"
+              readonly
+            >
+
+            <button
+              type="button"
+              id="copySessionLinkBtn"
+              class="primary-button"
+              data-i18n="createSession.copyLink"
+            >
+              Salin Pautan
+            </button>
+
+          </div>
+
+
+          <a
+            id="openStudentLink"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            class="secondary-link"
+            data-i18n="createSession.openStudentForm"
+          >
+            Lihat Borang Pelajar
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT UTAMA
+  ====================================================== -->
+
+  <script
+    type="module"
+    src="js/create-session.js"
+  ></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Exit Ticket Pelajar | Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="student-body">
+
+
+  <!-- =====================================================
+       TOPBAR PELAJAR
+  ====================================================== -->
+
+  <header class="student-topbar">
+
+
+    <!-- BRAND -->
+
+    <div class="student-brand">
+
+      <span class="brand-logo">
+        ✓
+      </span>
+
+      <div>
+
+        <strong data-i18n="app.name">
+          Smart Exit Ticket
+        </strong>
+
+        <small data-i18n="app.studentPortal">
+          Portal Pelajar
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         LANGUAGE SWITCHER
+    ================================================== -->
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="student-page">
+
+
+    <div class="student-page-container">
+
+
+      <!-- =================================================
+           HEADING
+      ================================================== -->
+
+      <section class="student-page-heading">
+
+        <p
+          class="section-label"
+          data-i18n="student.exitTicket"
+        >
+          EXIT TICKET
+        </p>
+
+        <h1 data-i18n="student.pageTitle">
+          Refleksi Pembelajaran
+        </h1>
+
+        <p data-i18n="student.pageDescription">
+          Lengkapkan Exit Ticket ini sebelum meninggalkan sesi pembelajaran.
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           LOADING
+      ================================================== -->
+
+      <section
+        id="studentLoading"
+        class="student-status-card"
+      >
+
+        <div class="status-spinner"></div>
+
+        <h2 data-i18n="student.loadingTitle">
+          Sedang mendapatkan sesi
+        </h2>
+
+        <p data-i18n="student.loadingDescription">
+          Sila tunggu sebentar...
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           ERROR
+      ================================================== -->
+
+      <section
+        id="studentError"
+        class="student-status-card error-card hidden"
+      >
+
+        <div class="status-icon">
+          !
+        </div>
+
+        <h2 id="studentErrorTitle">
+          Sesi tidak dapat dibuka
+        </h2>
+
+        <p id="studentErrorText">
+          Sila semak pautan Exit Ticket anda.
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           KANDUNGAN SESI
+      ================================================== -->
+
+      <section
+        id="studentSessionContent"
+        class="hidden"
+      >
+
+
+        <!-- ===============================================
+             MAKLUMAT SESI
+        ================================================ -->
+
+        <section class="student-session-card">
+
+          <div class="student-session-heading">
+
+            <div>
+
+              <p
+                class="section-label"
+                data-i18n="student.sessionInformation"
+              >
+                MAKLUMAT SESI
+              </p>
+
+              <h2 id="studentTopic">
+                -
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="student-session-info-grid">
+
+
+            <div>
+
+              <span data-i18n="student.course">
+                Kursus
+              </span>
+
+              <strong id="studentCourse">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="student.class">
+                Kelas
+              </span>
+
+              <strong id="studentClass">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="student.sessionCode">
+                Kod Sesi
+              </span>
+
+              <strong id="studentSessionCode">
+                -
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- SUBTOPIK -->
+
+          <div class="student-subtopic-section">
+
+            <strong data-i18n="student.subtopics">
+              Subtopik
+            </strong>
+
+            <ul id="studentSubtopicList">
+            </ul>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             BORANG PELAJAR
+        ================================================ -->
+
+        <form id="studentResponseForm">
+
+
+          <!-- =============================================
+               1. MAKLUMAT PELAJAR
+          ============================================== -->
+
+          <section class="student-form-card">
+
+            <div class="form-section-heading">
+
+              <span class="section-number">
+                1
+              </span>
+
+              <div>
+
+                <h2 data-i18n="student.studentInfo">
+                  Maklumat Pelajar
+                </h2>
+
+                <p data-i18n="student.studentInfoDescription">
+                  Masukkan nama dan nombor matrik anda.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+              <!-- NAMA -->
+
+              <div class="form-group">
+
+                <label
+                  for="studentName"
+                  data-i18n="student.fullName"
+                >
+                  Nama Penuh
+                </label>
+
+                <input
+                  type="text"
+                  id="studentName"
+                  maxlength="150"
+                  required
+                  autocomplete="name"
+                  placeholder="Masukkan nama penuh"
+                  data-i18n-placeholder="student.fullNamePlaceholder"
+                >
+
+              </div>
+
+
+              <!-- NO MATRIK -->
+
+              <div class="form-group">
+
+                <label
+                  for="studentMatric"
+                  data-i18n="student.matricNumber"
+                >
+                  Nombor Matrik
+                </label>
+
+                <input
+                  type="text"
+                  id="studentMatric"
+                  maxlength="50"
+                  required
+                  autocomplete="off"
+                  placeholder="Contoh: MS2512345678"
+                  data-i18n-placeholder="student.matricPlaceholder"
+                >
+
+                <small
+                  class="field-help"
+                  data-i18n="student.matricHelp"
+                >
+                  Pastikan nombor matrik betul. Setiap nombor matrik hanya boleh menghantar satu respons bagi sesi ini.
+                </small>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =============================================
+               2. TAHAP KEFAHAMAN
+          ============================================== -->
+
+          <section class="student-form-card">
+
+            <div class="form-section-heading">
+
+              <span class="section-number">
+                2
+              </span>
+
+              <div>
+
+                <h2 data-i18n="student.understandingLevel">
+                  Tahap Kefahaman
+                </h2>
+
+                <p data-i18n="student.understandingDescription">
+                  Pilih tahap kefahaman anda selepas sesi pembelajaran ini.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="understanding-options">
+
+
+              <!-- FAHAM -->
+
+              <label class="understanding-option">
+
+                <input
+                  type="radio"
+                  name="understandingLevel"
+                  value="faham"
+                  required
+                >
+
+                <span class="understanding-option-content">
+
+                  <strong data-i18n="student.understand">
+                    Saya faham
+                  </strong>
+
+                  <small data-i18n="student.understandDescription">
+                    Saya dapat memahami kandungan pembelajaran dengan baik.
+                  </small>
+
+                </span>
+
+              </label>
+
+
+              <!-- SEBAHAGIAN -->
+
+              <label class="understanding-option">
+
+                <input
+                  type="radio"
+                  name="understandingLevel"
+                  value="sebahagian"
+                  required
+                >
+
+                <span class="understanding-option-content">
+
+                  <strong data-i18n="student.partial">
+                    Faham sebahagian
+                  </strong>
+
+                  <small data-i18n="student.partialDescription">
+                    Saya memahami sebahagian kandungan tetapi masih memerlukan penjelasan.
+                  </small>
+
+                </span>
+
+              </label>
+
+
+              <!-- BELUM FAHAM -->
+
+              <label class="understanding-option">
+
+                <input
+                  type="radio"
+                  name="understandingLevel"
+                  value="belum_faham"
+                  required
+                >
+
+                <span class="understanding-option-content">
+
+                  <strong data-i18n="student.notUnderstand">
+                    Belum faham
+                  </strong>
+
+                  <small data-i18n="student.notUnderstandDescription">
+                    Saya masih memerlukan penerangan dan bimbingan lanjut.
+                  </small>
+
+                </span>
+
+              </label>
+
+
+            </div>
+
+          </section>
+
+
+          <!-- =============================================
+               3. REFLEKSI PEMBELAJARAN
+          ============================================== -->
+
+          <section class="student-form-card">
+
+            <div class="form-section-heading">
+
+              <span class="section-number">
+                3
+              </span>
+
+              <div>
+
+                <h2 data-i18n="student.reflection">
+                  Refleksi Pembelajaran
+                </h2>
+
+                <p data-i18n="student.reflectionDescription">
+                  Nyatakan perkara yang telah difahami dan perkara yang masih memerlukan penjelasan.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+              <!-- FAHAM -->
+
+              <div class="form-group full-width">
+
+                <label
+                  for="understoodText"
+                  data-i18n="student.understood"
+                >
+                  Apakah yang telah anda fahami?
+                </label>
+
+                <textarea
+                  id="understoodText"
+                  maxlength="1000"
+                  required
+                  placeholder="Tuliskan perkara utama yang telah anda fahami..."
+                  data-i18n-placeholder="student.understoodPlaceholder"
+                ></textarea>
+
+              </div>
+
+
+              <!-- BELUM FAHAM -->
+
+              <div class="form-group full-width">
+
+                <label
+                  for="notUnderstoodText"
+                  data-i18n="student.notUnderstood"
+                >
+                  Apakah yang masih belum anda fahami?
+                </label>
+
+                <textarea
+                  id="notUnderstoodText"
+                  maxlength="1000"
+                  required
+                  placeholder="Tuliskan perkara yang masih mengelirukan atau memerlukan penjelasan..."
+                  data-i18n-placeholder="student.notUnderstoodPlaceholder"
+                ></textarea>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =============================================
+               4. SOALAN PENSYARAH
+          ============================================== -->
+
+          <section class="student-form-card">
+
+            <div class="form-section-heading">
+
+              <span class="section-number">
+                4
+              </span>
+
+              <div>
+
+                <h2 data-i18n="student.lecturerQuestions">
+                  Soalan Pensyarah
+                </h2>
+
+                <p data-i18n="student.lecturerQuestionsDescription">
+                  Jawab soalan ringkas yang disediakan oleh Pensyarah.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div
+              id="studentQuestionContainer"
+              class="student-question-container"
+            >
+            </div>
+
+          </section>
+
+
+          <!-- =============================================
+               MESEJ BORANG
+          ============================================== -->
+
+          <div
+            id="studentFormMessage"
+            class="message"
+            role="status"
+            aria-live="polite"
+          >
+          </div>
+
+
+          <!-- =============================================
+               FEEDBACK AUTOMATIK
+          ============================================== -->
+
+          <div
+            id="automaticFeedback"
+            class="automatic-feedback hidden"
+          >
+          </div>
+
+
+          <!-- =============================================
+               HANTAR
+          ============================================== -->
+
+          <div class="student-submit-actions">
+
+            <button
+              type="submit"
+              id="submitResponseBtn"
+              class="primary-button student-submit-button"
+              data-i18n="student.submit"
+            >
+              Hantar Exit Ticket
+            </button>
+
+          </div>
+
+
+        </form>
+
+      </section>
+
+
+      <!-- =================================================
+           BERJAYA
+      ================================================== -->
+
+      <section
+        id="studentSuccess"
+        class="student-status-card success-card hidden"
+      >
+
+        <div class="status-icon">
+          ✓
+        </div>
+
+        <p
+          class="section-label"
+          data-i18n="student.successLabel"
+        >
+          EXIT TICKET BERJAYA DIHANTAR
+        </p>
+
+        <h2 data-i18n="student.thankYou">
+          Terima kasih
+        </h2>
+
+        <p data-i18n="student.successDescription">
+          Respons anda telah berjaya direkodkan. Maklum balas ini akan membantu Pensyarah memahami tahap kefahaman kelas.
+        </p>
+
+        <div
+          id="studentSuccessFeedback"
+          class="student-success-feedback"
+        >
+        </div>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="student-footer">
+
+    <p>
+      <span data-i18n="app.name">
+        Smart Exit Ticket
+      </span>
+      ·
+      <span data-i18n="student.footer">
+        Refleksi ringkas untuk pembelajaran yang lebih bermakna.
+      </span>
+    </p>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT UTAMA
+  ====================================================== -->
+
+  <script
+    type="module"
+    src="js/student.js"
+  ></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>

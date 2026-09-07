@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Dashboard | Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+
+    <!-- BRAND -->
+
+    <a
+      href="dashboard.html"
+      class="brand"
+    >
+
+      <span class="brand-logo">
+        ✓
+      </span>
+
+      <span>
+
+        <strong data-i18n="app.name">
+          Smart Exit Ticket
+        </strong>
+
+        <small data-i18n="app.lecturerPortal">
+          Portal Pensyarah
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <!-- =================================================
+         LANGUAGE SWITCHER
+    ================================================== -->
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFIL PENSYARAH
+    ================================================== -->
+
+    <div class="lecturer-profile">
+
+      <img
+        id="profilePhoto"
+        class="profile-photo"
+        src=""
+        alt="Gambar profil Pensyarah"
+      >
+
+      <div class="profile-details">
+
+        <strong id="lecturerName">
+          Pensyarah
+        </strong>
+
+        <small id="lecturerEmail">
+        </small>
+
+      </div>
+
+      <button
+        type="button"
+        id="logoutBtn"
+        class="logout-button"
+        data-i18n="nav.logout"
+      >
+        Log Keluar
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       DASHBOARD LAYOUT
+  ====================================================== -->
+
+  <div class="dashboard-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+      <nav class="sidebar-menu">
+
+
+        <a
+          href="dashboard.html"
+          class="menu-link active"
+          data-i18n="nav.dashboard"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="classes.html"
+          class="menu-link"
+          data-i18n="nav.classes"
+        >
+          Kelas Saya
+        </a>
+
+
+        <a
+          href="create-session.html"
+          class="menu-link"
+          data-i18n="nav.createSession"
+        >
+          Cipta Sesi
+        </a>
+
+
+        <a
+          href="manage-sessions.html"
+          class="menu-link"
+          data-i18n="nav.manageSessions"
+        >
+          Pengurusan Sesi
+        </a>
+
+
+        <a
+          href="responses.html"
+          class="menu-link"
+          data-i18n="nav.responses"
+        >
+          Respons dan Analisis
+        </a>
+
+
+      </nav>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="dashboard-main">
+
+
+      <!-- =================================================
+           PAGE HEADING
+      ================================================== -->
+
+      <section class="page-heading">
+
+
+        <div>
+
+          <p
+            class="section-label"
+            data-i18n="dashboard.label"
+          >
+            DASHBOARD
+          </p>
+
+
+          <h1>
+
+            <span data-i18n="dashboard.welcome">
+              Selamat datang
+            </span>,
+
+            <span id="welcomeName">
+              Pensyarah
+            </span>
+
+          </h1>
+
+
+          <p data-i18n="dashboard.description">
+
+            Urus kelas dan pantau tahap
+            kefahaman pelajar daripada satu tempat.
+
+          </p>
+
+        </div>
+
+
+        <a
+          href="create-session.html"
+          class="primary-button"
+          data-i18n="dashboard.createNewSession"
+        >
+          + Cipta Sesi Baharu
+        </a>
+
+
+      </section>
+
+
+      <!-- =================================================
+           STATISTIK DASHBOARD
+      ================================================== -->
+
+      <section class="dashboard-stats">
+
+
+        <!-- JUMLAH KELAS -->
+
+        <article class="stat-card">
+
+          <div class="stat-icon class-icon">
+            K
+          </div>
+
+
+          <div>
+
+            <span data-i18n="dashboard.totalClasses">
+              Jumlah Kelas
+            </span>
+
+            <strong id="totalClasses">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <!-- SESI AKTIF -->
+
+        <article class="stat-card">
+
+          <div class="stat-icon session-icon">
+            S
+          </div>
+
+
+          <div>
+
+            <span data-i18n="dashboard.activeSessions">
+              Sesi Aktif
+            </span>
+
+            <strong id="activeSessions">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <!-- JUMLAH RESPONS -->
+
+        <article class="stat-card">
+
+          <div class="stat-icon response-icon">
+            R
+          </div>
+
+
+          <div>
+
+            <span data-i18n="dashboard.totalResponses">
+              Jumlah Respons
+            </span>
+
+            <strong id="totalResponses">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- =================================================
+           SESI TERKINI
+      ================================================== -->
+
+      <section class="dashboard-panel">
+
+
+        <div class="dashboard-panel-heading">
+
+
+          <div>
+
+            <h2 data-i18n="dashboard.recentSessions">
+              Sesi Terkini
+            </h2>
+
+
+            <p data-i18n="dashboard.recentDescription">
+
+              Lima sesi Exit Ticket yang terakhir
+              dicipta.
+
+            </p>
+
+          </div>
+
+
+          <a
+            href="manage-sessions.html"
+            class="secondary-link"
+            data-i18n="dashboard.viewAll"
+          >
+            Lihat semua
+          </a>
+
+
+        </div>
+
+
+        <!--
+          dashboard.js akan memasukkan
+          sesi terkini ke dalam container ini.
+        -->
+
+        <div
+          id="recentSessions"
+          class="recent-sessions-list"
+        >
+
+          <div class="empty-dashboard-state">
+
+            <div class="empty-dashboard-icon">
+              +
+            </div>
+
+            <strong>
+              Belum ada sesi
+            </strong>
+
+            <p>
+              Cipta kelas dan sesi Exit Ticket
+              pertama untuk mula menerima
+              respons pelajar.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       DASHBOARD JAVASCRIPT
+  ====================================================== -->
+
+  <script
+    type="module"
+    src="js/dashboard.js"
+  ></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>

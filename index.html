@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="login-body">
+
+
+  <!-- =====================================================
+       LANGUAGE SWITCHER
+  ====================================================== -->
+
+  <div class="login-language-area">
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="login-page">
+
+
+    <section class="login-card">
+
+
+      <!-- =================================================
+           LOGO
+      ================================================== -->
+
+      <div class="logo-container">
+  <img
+    src="images/smart-exit-ticket-logo.png"
+    alt="Smart Exit Ticket Logo"
+    class="app-logo"
+  >
+</div>
+
+
+      <!-- =================================================
+           INTRO
+      ================================================== -->
+
+      <div class="login-heading">
+
+        <p
+          class="section-label"
+          data-i18n="home.label"
+        >
+          REFLEKSI PEMBELAJARAN
+        </p>
+
+      
+
+        <p data-i18n="home.description">
+          Kenal pasti tahap kefahaman pelajar
+          dengan cepat, tersusun dan berkesan.
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           LOGIN PENSYARAH
+      ================================================== -->
+
+      <section class="login-section">
+
+        <h2 data-i18n="home.lecturerLoginTitle">
+          Log Masuk Pensyarah
+        </h2>
+
+        <p data-i18n="home.lecturerLoginDescription">
+          Gunakan akaun Google untuk mengurus kelas,
+          mencipta sesi dan melihat analisis respons.
+        </p>
+
+
+        <button
+          type="button"
+          id="googleLoginBtn"
+          class="google-login-button"
+        >
+
+          <span class="google-icon">
+            G
+          </span>
+
+          <span data-i18n="home.continueGoogle">
+            Teruskan dengan Google
+          </span>
+
+        </button>
+
+
+        <div
+          id="loginMessage"
+          class="message"
+          role="status"
+          aria-live="polite"
+        >
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           PELAJAR
+      ================================================== -->
+
+      <section class="student-entry-section">
+
+        <h2 data-i18n="home.studentTitle">
+          Untuk Pelajar
+        </h2>
+
+        <p data-i18n="home.studentDescription">
+          Imbas kod QR atau buka pautan yang diberikan
+          oleh pensyarah untuk menjawab Exit Ticket.
+        </p>
+
+      </section>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="login-footer">
+
+    <p>
+      © 2026
+      <span data-i18n="app.name">
+        Smart Exit Ticket
+      </span>
+    </p>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT LOGIN
+  ====================================================== -->
+
+  <script
+  type="module"
+  src="js/auth.js"
+></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>

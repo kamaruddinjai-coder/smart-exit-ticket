@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Respons dan Analisis | Smart Exit Ticket
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+
+    <!-- BRAND -->
+
+    <a
+      href="dashboard.html"
+      class="brand"
+    >
+
+      <span class="brand-logo">
+        ✓
+      </span>
+
+      <span>
+
+        <strong data-i18n="app.name">
+          Smart Exit Ticket
+        </strong>
+
+        <small data-i18n="app.lecturerPortal">
+          Portal Pensyarah
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <!-- =================================================
+         LANGUAGE SWITCHER
+    ================================================== -->
+
+    <div class="language-switcher">
+
+      <button
+        type="button"
+        id="languageBM"
+        class="language-button"
+        aria-label="Bahasa Melayu"
+      >
+        BM
+      </button>
+
+      <span class="language-divider">
+        |
+      </span>
+
+      <button
+        type="button"
+        id="languageEN"
+        class="language-button"
+        aria-label="English"
+      >
+        EN
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFIL PENSYARAH
+    ================================================== -->
+
+    <div class="lecturer-profile">
+
+      <img
+        id="profilePhoto"
+        class="profile-photo"
+        src=""
+        alt="Gambar profil Pensyarah"
+      >
+
+      <div class="profile-details">
+
+        <strong id="lecturerName">
+          Pensyarah
+        </strong>
+
+        <small id="lecturerEmail">
+        </small>
+
+      </div>
+
+      <button
+        type="button"
+        id="logoutBtn"
+        class="logout-button"
+        data-i18n="nav.logout"
+      >
+        Log Keluar
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       LAYOUT
+  ====================================================== -->
+
+  <div class="dashboard-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+      <nav class="sidebar-menu">
+
+
+        <a
+          href="dashboard.html"
+          class="menu-link"
+          data-i18n="nav.dashboard"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="classes.html"
+          class="menu-link"
+          data-i18n="nav.classes"
+        >
+          Kelas Saya
+        </a>
+
+
+        <a
+          href="create-session.html"
+          class="menu-link"
+          data-i18n="nav.createSession"
+        >
+          Cipta Sesi
+        </a>
+
+
+        <a
+          href="manage-sessions.html"
+          class="menu-link"
+          data-i18n="nav.manageSessions"
+        >
+          Pengurusan Sesi
+        </a>
+
+
+        <a
+          href="responses.html"
+          class="menu-link active"
+          data-i18n="nav.responses"
+        >
+          Respons dan Analisis
+        </a>
+
+
+      </nav>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="dashboard-main">
+
+
+      <!-- =================================================
+           TAJUK HALAMAN
+      ================================================== -->
+
+      <section class="page-heading">
+
+        <div>
+
+          <p
+            class="section-label"
+            data-i18n="responses.label"
+          >
+            ANALISIS EXIT TICKET
+          </p>
+
+          <h1 data-i18n="responses.title">
+            Respons dan Analisis
+          </h1>
+
+          <p data-i18n="responses.description">
+            Pantau tahap kefahaman pelajar berdasarkan
+            respons Exit Ticket yang telah dihantar.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           MESEJ
+      ================================================== -->
+
+      <div
+        id="responseMessage"
+        class="message"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+
+      <!-- =================================================
+           RINGKASAN KESELURUHAN
+      ================================================== -->
+
+      <section class="response-summary-grid">
+
+
+        <article class="summary-card">
+
+          <div class="summary-icon">
+            S
+          </div>
+
+          <div>
+
+            <span data-i18n="responses.totalSessions">
+              Jumlah Sesi
+            </span>
+
+            <strong id="overallSessionCount">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <article class="summary-card">
+
+          <div class="summary-icon">
+            R
+          </div>
+
+          <div>
+
+            <span data-i18n="responses.totalResponses">
+              Jumlah Respons
+            </span>
+
+            <strong id="overallResponseCount">
+              0
+            </strong>
+
+          </div>
+
+        </article>
+
+
+      </section>
+
+
+      <!-- =================================================
+           PILIH SESI
+      ================================================== -->
+
+      <section class="form-panel">
+
+        <div class="form-section-heading">
+
+          <span class="section-number">
+            1
+          </span>
+
+          <div>
+
+            <h2 data-i18n="responses.selectSession">
+              Pilih Sesi
+            </h2>
+
+            <p data-i18n="responses.selectSessionDescription">
+              Pilih sesi Exit Ticket untuk melihat analisis
+              dan respons pelajar.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+
+            <label
+              for="sessionSelect"
+              data-i18n="responses.selectSession"
+            >
+              Pilih Sesi
+            </label>
+
+            <select id="sessionSelect">
+
+              <option
+                value=""
+                data-i18n="responses.selectSessionOption"
+              >
+                Pilih sesi Exit Ticket
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           LOADING
+      ================================================== -->
+
+      <section
+        id="responsesLoading"
+        class="student-status-card"
+      >
+
+        <div class="status-spinner"></div>
+
+        <h2 data-i18n="responses.loadingTitle">
+          Sedang mendapatkan respons
+        </h2>
+
+        <p data-i18n="common.loading">
+          Sedang memuatkan...
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           TIADA SESI
+      ================================================== -->
+
+      <section
+        id="noResponseSessionsPanel"
+        class="student-status-card hidden"
+      >
+
+        <div class="status-icon">
+          S
+        </div>
+
+        <h2 data-i18n="responses.noSessions">
+          Tiada sesi ditemui
+        </h2>
+
+        <p data-i18n="responses.noSessionsDescription">
+          Cipta sesi Exit Ticket terlebih dahulu
+          untuk melihat respons dan analisis.
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           KANDUNGAN ANALISIS
+      ================================================== -->
+
+      <div
+        id="responseAnalysisContent"
+        class="hidden"
+      >
+
+
+        <!-- ===============================================
+             MAKLUMAT SESI
+        ================================================ -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              2
+            </span>
+
+            <div>
+
+              <h2 data-i18n="responses.sessionInfo">
+                Maklumat Sesi
+              </h2>
+
+              <p data-i18n="responses.sessionInfoDescription">
+                Ringkasan sesi Exit Ticket yang sedang dipilih.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="response-session-info">
+
+
+            <div>
+
+              <span data-i18n="responses.topic">
+                Topik
+              </span>
+
+              <strong id="selectedSessionTopic">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="responses.class">
+                Kelas
+              </span>
+
+              <strong id="selectedSessionClass">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="responses.course">
+                Kursus
+              </span>
+
+              <strong id="selectedSessionCourse">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="responses.sessionCode">
+                Kod Sesi
+              </span>
+
+              <strong id="selectedSessionCode">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="common.status">
+                Status
+              </span>
+
+              <strong id="selectedSessionStatus">
+                -
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span data-i18n="responses.totalResponses">
+                Jumlah Respons
+              </span>
+
+              <strong id="selectedSessionResponseCount">
+                0
+              </strong>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             ANALISIS TAHAP KEFAHAMAN
+        ================================================ -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              3
+            </span>
+
+            <div>
+
+              <h2 data-i18n="responses.analysis">
+                Analisis Tahap Kefahaman
+              </h2>
+
+              <p data-i18n="responses.analysisDescription">
+                Ringkasan tahap kefahaman berdasarkan
+                respons pelajar.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="understanding-analysis-grid">
+
+
+            <!-- FAHAM -->
+
+            <article class="analysis-card">
+
+              <span data-i18n="responses.understand">
+                Faham
+              </span>
+
+              <strong id="understandCount">
+                0
+              </strong>
+
+              <small id="understandPercentage">
+                0%
+              </small>
+
+            </article>
+
+
+            <!-- SEBAHAGIAN -->
+
+            <article class="analysis-card">
+
+              <span data-i18n="responses.partial">
+                Faham Sebahagian
+              </span>
+
+              <strong id="partialCount">
+                0
+              </strong>
+
+              <small id="partialPercentage">
+                0%
+              </small>
+
+            </article>
+
+
+            <!-- BELUM FAHAM -->
+
+            <article class="analysis-card">
+
+              <span data-i18n="responses.notUnderstand">
+                Belum Faham
+              </span>
+
+              <strong id="notUnderstandCount">
+                0
+              </strong>
+
+              <small id="notUnderstandPercentage">
+                0%
+              </small>
+
+            </article>
+
+
+          </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             PERKARA YANG BELUM DIFAHAMI
+        ================================================ -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              4
+            </span>
+
+            <div>
+
+              <h2 data-i18n="responses.notUnderstood">
+                Perkara yang Masih Belum Difahami
+              </h2>
+
+              <p data-i18n="responses.notUnderstoodDescription">
+                Refleksi pelajar tentang perkara
+                yang masih memerlukan penjelasan.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="notUnderstoodSummary"
+            class="reflection-summary-list"
+          >
+          </div>
+
+
+          <div
+            id="noNotUnderstoodPanel"
+            class="student-status-card hidden"
+          >
+
+            <div class="status-icon">
+              ✓
+            </div>
+
+            <h3 data-i18n="responses.noNotUnderstood">
+              Tiada isu utama direkodkan
+            </h3>
+
+            <p data-i18n="responses.noNotUnderstoodDescription">
+              Tiada refleksi berkaitan perkara
+              yang masih belum difahami untuk sesi ini.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===============================================
+             RESPONS PELAJAR
+        ================================================ -->
+
+        <section class="form-panel">
+
+          <div class="form-section-heading">
+
+            <span class="section-number">
+              5
+            </span>
+
+            <div>
+
+              <h2 data-i18n="responses.studentResponses">
+                Respons Pelajar
+              </h2>
+
+              <p data-i18n="responses.studentResponsesDescription">
+                Lihat jawapan individu yang dihantar
+                oleh pelajar.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOOLBAR -->
+
+          <div class="response-toolbar">
+
+            <div class="form-group">
+
+              <label
+                for="responseSearch"
+                data-i18n="responses.searchStudent"
+              >
+                Cari Pelajar
+              </label>
+
+              <input
+                type="search"
+                id="responseSearch"
+                placeholder="Cari nama atau nombor matrik..."
+                data-i18n-placeholder="responses.searchPlaceholder"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- TIADA RESPONS -->
+
+          <div
+            id="noResponsesPanel"
+            class="student-status-card hidden"
+          >
+
+            <div class="status-icon">
+              R
+            </div>
+
+            <h3 data-i18n="responses.noResponses">
+              Belum ada respons
+            </h3>
+
+            <p data-i18n="responses.noResponsesDescription">
+              Belum ada pelajar menghantar Exit Ticket
+              untuk sesi ini.
+            </p>
+
+          </div>
+
+
+          <!-- TIADA HASIL CARIAN -->
+
+          <div
+            id="noSearchResultsPanel"
+            class="student-status-card hidden"
+          >
+
+            <div class="status-icon">
+              ?
+            </div>
+
+            <h3 data-i18n="responses.noSearchResults">
+              Tiada pelajar ditemui
+            </h3>
+
+            <p data-i18n="responses.noSearchResultsDescription">
+              Tiada respons yang sepadan dengan carian anda.
+            </p>
+
+          </div>
+
+
+          <!-- SENARAI RESPONS -->
+
+          <div
+            id="responsesList"
+            class="responses-list"
+          >
+          </div>
+
+        </section>
+
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT UTAMA
+  ====================================================== -->
+
+  <script
+    type="module"
+    src="js/responses.js"
+  ></script>
+
+
+  <!-- =====================================================
+       DUAL LANGUAGE
+  ====================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeI18n
+    } from "./js/i18n.js";
+
+    initializeI18n();
+
+  </script>
+
+
+</body>
+
+</html>
