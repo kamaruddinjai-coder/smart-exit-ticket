@@ -136,8 +136,11 @@ const noNotUnderstoodPanel =
 
 
 /* =========================================================
-   RESPONS PELAJAR
+   RESPONS PELAJAR - SENARAI
 ========================================================= */
+
+const responseListView =
+  document.getElementById("responseListView");
 
 const responseSearch =
   document.getElementById("responseSearch");
@@ -151,6 +154,77 @@ const noSearchResultsPanel =
 const responsesList =
   document.getElementById("responsesList");
 
+const exportAllResponsesBtn =
+  document.getElementById("exportAllResponsesBtn");
+
+const exportSummaryBtn =
+  document.getElementById("exportSummaryBtn");
+
+
+/* =========================================================
+   RESPONS PELAJAR - INDIVIDU
+========================================================= */
+
+const individualResponseView =
+  document.getElementById("individualResponseView");
+
+const backToResponseListBtn =
+  document.getElementById("backToResponseListBtn");
+
+const individualStudentSelect =
+  document.getElementById("individualStudentSelect");
+
+const individualResponseEyebrow =
+  document.getElementById("individualResponseEyebrow");
+
+const individualStudentName =
+  document.getElementById("individualStudentName");
+
+const individualStudentMatric =
+  document.getElementById("individualStudentMatric");
+
+const individualUnderstandingBadge =
+  document.getElementById("individualUnderstandingBadge");
+
+const individualClassLabel =
+  document.getElementById("individualClassLabel");
+
+const individualStudentClass =
+  document.getElementById("individualStudentClass");
+
+const individualSubmittedLabel =
+  document.getElementById("individualSubmittedLabel");
+
+const individualSubmittedAt =
+  document.getElementById("individualSubmittedAt");
+
+const individualUnderstoodTitle =
+  document.getElementById("individualUnderstoodTitle");
+
+const individualUnderstoodText =
+  document.getElementById("individualUnderstoodText");
+
+const individualNotUnderstoodTitle =
+  document.getElementById("individualNotUnderstoodTitle");
+
+const individualNotUnderstoodText =
+  document.getElementById("individualNotUnderstoodText");
+
+const individualQuestionAnswersTitle =
+  document.getElementById("individualQuestionAnswersTitle");
+
+const individualQuestionAnswers =
+  document.getElementById("individualQuestionAnswers");
+
+const previousResponseBtn =
+  document.getElementById("previousResponseBtn");
+
+const nextResponseBtn =
+  document.getElementById("nextResponseBtn");
+
+const responsePosition =
+  document.getElementById("responsePosition");
+
 
 /* =========================================================
    DATA GLOBAL
@@ -163,6 +237,10 @@ let lecturerSessions = [];
 let lecturerResponses = [];
 
 let selectedSessionId = "";
+
+let individualResponses = [];
+
+let selectedIndividualIndex = 0;
 
 
 /* =========================================================
@@ -230,6 +308,102 @@ function clearMessage() {
 
   responseMessage.className =
     "message";
+}
+
+
+/* =========================================================
+   BAHASA
+========================================================= */
+
+function isEnglish() {
+
+  return (
+    document.documentElement.lang ===
+    "en"
+  );
+}
+
+
+function updateDynamicLabels() {
+
+  exportAllResponsesBtn.textContent =
+    isEnglish()
+      ? "Export All Responses (CSV)"
+      : "Eksport Semua Respons (CSV)";
+
+
+  exportSummaryBtn.textContent =
+    isEnglish()
+      ? "Export Summary (CSV)"
+      : "Eksport Ringkasan (CSV)";
+
+
+  backToResponseListBtn.textContent =
+    isEnglish()
+      ? "← Back to List"
+      : "← Kembali ke Senarai";
+
+
+  individualResponseEyebrow.textContent =
+    isEnglish()
+      ? "INDIVIDUAL RESPONSE"
+      : "RESPONS INDIVIDU";
+
+
+  individualClassLabel.textContent =
+    isEnglish()
+      ? "Class"
+      : "Kelas";
+
+
+  individualSubmittedLabel.textContent =
+    isEnglish()
+      ? "Submitted"
+      : "Dihantar";
+
+
+  individualUnderstoodTitle.textContent =
+    isEnglish()
+      ? "What the student understood"
+      : "Apa yang telah difahami";
+
+
+  individualNotUnderstoodTitle.textContent =
+    isEnglish()
+      ? "What is still not understood"
+      : "Apa yang masih belum difahami";
+
+
+  individualQuestionAnswersTitle.textContent =
+    isEnglish()
+      ? "Question Answers"
+      : "Jawapan Soalan";
+
+
+  previousResponseBtn.textContent =
+    isEnglish()
+      ? "← Previous"
+      : "← Sebelumnya";
+
+
+  nextResponseBtn.textContent =
+    isEnglish()
+      ? "Next →"
+      : "Seterusnya →";
+
+
+  const selectLabel =
+    document.querySelector(
+      'label[for="individualStudentSelect"]'
+    );
+
+  if (selectLabel) {
+
+    selectLabel.textContent =
+      isEnglish()
+        ? "Select Student"
+        : "Pilih Pelajar";
+  }
 }
 
 
@@ -317,38 +491,70 @@ function getUnderstandingLabel(
    FORMAT TARIKH
 ========================================================= */
 
-function formatTimestamp(
+function getDateFromTimestamp(
   timestamp
 ) {
 
   if (!timestamp) {
-    return "-";
+    return null;
   }
 
   try {
 
+    if (
+      typeof timestamp.toDate ===
+      "function"
+    ) {
+
+      return timestamp.toDate();
+    }
+
     const date =
-      typeof timestamp.toDate === "function"
-        ? timestamp.toDate()
-        : new Date(timestamp);
+      new Date(timestamp);
 
-    const locale =
-      document.documentElement.lang === "en"
-        ? "en-MY"
-        : "ms-MY";
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
 
-    return new Intl.DateTimeFormat(
-      locale,
-      {
-        dateStyle: "medium",
-        timeStyle: "short"
-      }
-    ).format(date);
+      return null;
+    }
+
+    return date;
 
   } catch (error) {
 
+    return null;
+  }
+}
+
+
+function formatTimestamp(
+  timestamp
+) {
+
+  const date =
+    getDateFromTimestamp(
+      timestamp
+    );
+
+  if (!date) {
     return "-";
   }
+
+  const locale =
+    isEnglish()
+      ? "en-MY"
+      : "ms-MY";
+
+  return new Intl.DateTimeFormat(
+    locale,
+    {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }
+  ).format(date);
 }
 
 
@@ -379,7 +585,8 @@ function getSelectedSession() {
 
   return lecturerSessions.find(
     (sessionData) =>
-      sessionData.id === selectedSessionId
+      sessionData.id ===
+      selectedSessionId
   );
 }
 
@@ -403,6 +610,59 @@ function getSelectedSessionResponses() {
 
 
 /* =========================================================
+   SUSUN RESPONS
+========================================================= */
+
+function sortResponsesByStudent(
+  responses
+) {
+
+  return [...responses].sort(
+    (
+      firstResponse,
+      secondResponse
+    ) => {
+
+      const firstName =
+        (
+          firstResponse.studentName ||
+          ""
+        ).trim();
+
+      const secondName =
+        (
+          secondResponse.studentName ||
+          ""
+        ).trim();
+
+      const nameResult =
+        firstName.localeCompare(
+          secondName,
+          isEnglish()
+            ? "en"
+            : "ms",
+          {
+            sensitivity: "base"
+          }
+        );
+
+      if (nameResult !== 0) {
+        return nameResult;
+      }
+
+      return (
+        firstResponse.studentMatric ||
+        ""
+      ).localeCompare(
+        secondResponse.studentMatric ||
+        ""
+      );
+    }
+  );
+}
+
+
+/* =========================================================
    PAPAR OPTION SESI
 ========================================================= */
 
@@ -417,7 +677,9 @@ function renderSessionOptions() {
 
 
   const defaultOption =
-    document.createElement("option");
+    document.createElement(
+      "option"
+    );
 
   defaultOption.value =
     "";
@@ -463,7 +725,8 @@ function renderSessionOptions() {
   if (
     lecturerSessions.some(
       (sessionData) =>
-        sessionData.id === currentValue
+        sessionData.id ===
+        currentValue
     )
   ) {
 
@@ -566,7 +829,6 @@ function displayUnderstandingAnalysis() {
   const sessionResponses =
     getSelectedSessionResponses();
 
-
   const total =
     sessionResponses.length;
 
@@ -640,11 +902,27 @@ function displayNotUnderstoodSummary() {
   const items =
     sessionResponses
       .map(
-        (responseData) =>
-          responseData.notUnderstoodText
-            ?.trim()
+        (responseData) => ({
+          studentName:
+            responseData.studentName ||
+            t(
+              "responses.unknownStudent",
+              "Pelajar"
+            ),
+
+          studentMatric:
+            responseData.studentMatric ||
+            "-",
+
+          text:
+            responseData.notUnderstoodText
+              ?.trim()
+        })
       )
-      .filter(Boolean);
+      .filter(
+        (item) =>
+          item.text
+      );
 
 
   notUnderstoodSummary.innerHTML =
@@ -669,24 +947,33 @@ function displayNotUnderstoodSummary() {
 
 
   items.forEach(
-    (text, index) => {
+    (item, index) => {
 
-      const item =
+      const article =
         document.createElement(
           "article"
         );
 
-      item.className =
+      article.className =
         "reflection-summary-item";
 
 
-      const number =
+      const heading =
         document.createElement(
-          "span"
+          "strong"
         );
 
-      number.textContent =
-        index + 1;
+      heading.textContent =
+        `${index + 1}. ${item.studentName}`;
+
+
+      const meta =
+        document.createElement(
+          "small"
+        );
+
+      meta.textContent =
+        item.studentMatric;
 
 
       const content =
@@ -695,17 +982,18 @@ function displayNotUnderstoodSummary() {
         );
 
       content.textContent =
-        text;
+        item.text;
 
 
-      item.append(
-        number,
+      article.append(
+        heading,
+        meta,
         content
       );
 
 
       notUnderstoodSummary.appendChild(
-        item
+        article
       );
     }
   );
@@ -713,53 +1001,10 @@ function displayNotUnderstoodSummary() {
 
 
 /* =========================================================
-   CIPTA LABEL MAKLUMAT
+   CIPTA ITEM SENARAI RESPONS
 ========================================================= */
 
-function createInfoItem(
-  label,
-  value
-) {
-
-  const wrapper =
-    document.createElement(
-      "div"
-    );
-
-
-  const labelElement =
-    document.createElement(
-      "span"
-    );
-
-  labelElement.textContent =
-    label;
-
-
-  const valueElement =
-    document.createElement(
-      "strong"
-    );
-
-  valueElement.textContent =
-    value || "-";
-
-
-  wrapper.append(
-    labelElement,
-    valueElement
-  );
-
-
-  return wrapper;
-}
-
-
-/* =========================================================
-   CIPTA KAD RESPONS
-========================================================= */
-
-function createResponseCard(
+function createResponseListItem(
   responseData
 ) {
 
@@ -769,43 +1014,62 @@ function createResponseCard(
     );
 
   card.className =
-    "response-card";
+    "response-list-card";
 
   card.dataset.level =
     responseData.understandingLevel ||
     "";
 
 
-  /* -----------------------------------------
-     HEADER
-  ----------------------------------------- */
-
-  const header =
+  const main =
     document.createElement(
       "div"
     );
 
-  header.className =
-    "response-card-header";
+  main.className =
+    "response-list-main";
 
 
-  const studentArea =
+  const heading =
     document.createElement(
       "div"
     );
 
+  heading.className =
+    "response-list-heading";
 
-  const studentName =
+
+  const name =
     document.createElement(
       "h3"
     );
 
-  studentName.textContent =
+  name.textContent =
     responseData.studentName ||
     t(
       "responses.unknownStudent",
       "Pelajar"
     );
+
+
+  const badge =
+    document.createElement(
+      "span"
+    );
+
+  badge.className =
+    "understanding-badge";
+
+  badge.textContent =
+    getUnderstandingLabel(
+      responseData.understandingLevel
+    );
+
+
+  heading.append(
+    name,
+    badge
+  );
 
 
   const matric =
@@ -823,286 +1087,59 @@ function createResponseCard(
     }`;
 
 
-  studentArea.append(
-    studentName,
-    matric
+  const submitted =
+    document.createElement(
+      "small"
+    );
+
+  submitted.textContent =
+    `${
+      isEnglish()
+        ? "Submitted"
+        : "Dihantar"
+    }: ${formatTimestamp(
+      responseData.submittedAt
+    )}`;
+
+
+  main.append(
+    heading,
+    matric,
+    submitted
   );
 
 
-  const badge =
+  const viewButton =
     document.createElement(
-      "span"
+      "button"
     );
 
-  badge.className =
-    "understanding-badge";
+  viewButton.type =
+    "button";
 
-  badge.dataset.level =
-    responseData.understandingLevel ||
-    "";
+  viewButton.className =
+    "primary-button response-view-button";
 
-  badge.textContent =
-    getUnderstandingLabel(
-      responseData.understandingLevel
-    );
-
-
-  header.append(
-    studentArea,
-    badge
-  );
+  viewButton.textContent =
+    isEnglish()
+      ? "View Response"
+      : "Lihat Respons";
 
 
-  /* -----------------------------------------
-     INFO RINGKAS
-  ----------------------------------------- */
+  viewButton.addEventListener(
+    "click",
+    () => {
 
-  const info =
-    document.createElement(
-      "div"
-    );
-
-  info.className =
-    "response-session-info";
-
-
-  info.append(
-    createInfoItem(
-      t(
-        "responses.submittedAt",
-        "Dihantar"
-      ),
-      formatTimestamp(
-        responseData.submittedAt
-      )
-    )
-  );
-
-
-  /* -----------------------------------------
-     REFLEKSI
-  ----------------------------------------- */
-
-  const reflectionGrid =
-    document.createElement(
-      "div"
-    );
-
-  reflectionGrid.className =
-    "response-reflection-grid";
-
-
-  const understoodBlock =
-    document.createElement(
-      "div"
-    );
-
-
-  const understoodTitle =
-    document.createElement(
-      "strong"
-    );
-
-  understoodTitle.textContent =
-    t(
-      "responses.whatUnderstood",
-      "Apa yang telah difahami"
-    );
-
-
-  const understoodText =
-    document.createElement(
-      "p"
-    );
-
-  understoodText.textContent =
-    responseData.understoodText ||
-    "-";
-
-
-  understoodBlock.append(
-    understoodTitle,
-    understoodText
-  );
-
-
-  const notUnderstoodBlock =
-    document.createElement(
-      "div"
-    );
-
-
-  const notUnderstoodTitle =
-    document.createElement(
-      "strong"
-    );
-
-  notUnderstoodTitle.textContent =
-    t(
-      "responses.whatNotUnderstood",
-      "Apa yang masih belum difahami"
-    );
-
-
-  const notUnderstoodText =
-    document.createElement(
-      "p"
-    );
-
-  notUnderstoodText.textContent =
-    responseData.notUnderstoodText ||
-    "-";
-
-
-  notUnderstoodBlock.append(
-    notUnderstoodTitle,
-    notUnderstoodText
-  );
-
-
-  reflectionGrid.append(
-    understoodBlock,
-    notUnderstoodBlock
-  );
-
-
-  /* -----------------------------------------
-     JAWAPAN SOALAN
-  ----------------------------------------- */
-
-  const questionSection =
-    document.createElement(
-      "div"
-    );
-
-  questionSection.className =
-    "response-question-answers";
-
-
-  const questionHeading =
-    document.createElement(
-      "h4"
-    );
-
-  questionHeading.textContent =
-    t(
-      "responses.questionAnswers",
-      "Jawapan Soalan"
-    );
-
-
-  questionSection.appendChild(
-    questionHeading
-  );
-
-
-  const questionAnswers =
-    Array.isArray(
-      responseData.questionAnswers
-    )
-      ? responseData.questionAnswers
-      : [];
-
-
-  if (
-    questionAnswers.length === 0
-  ) {
-
-    const noAnswer =
-      document.createElement(
-        "p"
+      openIndividualResponse(
+        responseData.id
       );
+    }
+  );
 
-    noAnswer.textContent =
-      t(
-        "responses.noQuestionAnswers",
-        "Tiada jawapan soalan."
-      );
-
-    questionSection.appendChild(
-      noAnswer
-    );
-
-  } else {
-
-    questionAnswers.forEach(
-      (item, index) => {
-
-        const answerItem =
-          document.createElement(
-            "div"
-          );
-
-        answerItem.className =
-          "response-answer-item";
-
-
-        const questionText =
-          document.createElement(
-            "strong"
-          );
-
-
-        const answerText =
-          document.createElement(
-            "p"
-          );
-
-
-        if (
-          typeof item === "object" &&
-          item !== null
-        ) {
-
-          questionText.textContent =
-            item.question ||
-            `${t(
-              "responses.question",
-              "Soalan"
-            )} ${index + 1}`;
-
-
-          answerText.textContent =
-            item.answer ||
-            "-";
-
-        } else {
-
-          questionText.textContent =
-            `${t(
-              "responses.question",
-              "Soalan"
-            )} ${index + 1}`;
-
-
-          answerText.textContent =
-            String(item || "-");
-        }
-
-
-        answerItem.append(
-          questionText,
-          answerText
-        );
-
-
-        questionSection.appendChild(
-          answerItem
-        );
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     MASUKKAN KANDUNGAN
-  ----------------------------------------- */
 
   card.append(
-    header,
-    info,
-    reflectionGrid,
-    questionSection
+    main,
+    viewButton
   );
 
 
@@ -1111,13 +1148,15 @@ function createResponseCard(
 
 
 /* =========================================================
-   PAPAR RESPONS
+   PAPAR SENARAI RESPONS
 ========================================================= */
 
 function displayResponses() {
 
   const sessionResponses =
-    getSelectedSessionResponses();
+    sortResponsesByStudent(
+      getSelectedSessionResponses()
+    );
 
 
   responsesList.innerHTML =
@@ -1132,6 +1171,13 @@ function displayResponses() {
   noSearchResultsPanel
     .classList
     .add("hidden");
+
+
+  exportAllResponsesBtn.disabled =
+    sessionResponses.length === 0;
+
+  exportSummaryBtn.disabled =
+    sessionResponses.length === 0;
 
 
   if (
@@ -1188,37 +1234,1081 @@ function displayResponses() {
   }
 
 
-  filteredResponses
-    .sort(
-      (
-        firstResponse,
-        secondResponse
-      ) => {
+  filteredResponses.forEach(
+    (responseData) => {
 
-        const firstTime =
-          firstResponse.submittedAt
-            ?.seconds || 0;
+      responsesList.appendChild(
+        createResponseListItem(
+          responseData
+        )
+      );
+    }
+  );
+}
 
-        const secondTime =
-          secondResponse.submittedAt
-            ?.seconds || 0;
 
-        return (
-          secondTime -
-          firstTime
+/* =========================================================
+   RESPONS INDIVIDU
+========================================================= */
+
+function prepareIndividualResponses() {
+
+  individualResponses =
+    sortResponsesByStudent(
+      getSelectedSessionResponses()
+    );
+}
+
+
+function renderIndividualStudentOptions() {
+
+  individualStudentSelect.innerHTML =
+    "";
+
+
+  individualResponses.forEach(
+    (
+      responseData,
+      index
+    ) => {
+
+      const option =
+        document.createElement(
+          "option"
         );
-      }
+
+      option.value =
+        String(index);
+
+      option.textContent =
+        [
+          responseData.studentName ||
+            t(
+              "responses.unknownStudent",
+              "Pelajar"
+            ),
+
+          responseData.studentMatric
+        ]
+          .filter(Boolean)
+          .join(" — ");
+
+
+      individualStudentSelect.appendChild(
+        option
+      );
+    }
+  );
+
+
+  individualStudentSelect.value =
+    String(
+      selectedIndividualIndex
+    );
+}
+
+
+function renderIndividualQuestionAnswers(
+  responseData
+) {
+
+  individualQuestionAnswers.innerHTML =
+    "";
+
+
+  const questionAnswers =
+    Array.isArray(
+      responseData.questionAnswers
     )
-    .forEach(
-      (responseData) => {
+      ? responseData.questionAnswers
+      : [];
 
-        responsesList.appendChild(
-          createResponseCard(
-            responseData
-          )
+
+  if (
+    questionAnswers.length === 0
+  ) {
+
+    const noAnswer =
+      document.createElement(
+        "p"
+      );
+
+    noAnswer.className =
+      "individual-no-answer";
+
+    noAnswer.textContent =
+      isEnglish()
+        ? "No question answers were submitted."
+        : "Tiada jawapan soalan dihantar.";
+
+    individualQuestionAnswers.appendChild(
+      noAnswer
+    );
+
+    return;
+  }
+
+
+  questionAnswers.forEach(
+    (item, index) => {
+
+      const answerItem =
+        document.createElement(
+          "div"
         );
+
+      answerItem.className =
+        "response-answer-item";
+
+
+      const questionText =
+        document.createElement(
+          "strong"
+        );
+
+
+      const answerText =
+        document.createElement(
+          "p"
+        );
+
+
+      if (
+        typeof item === "object" &&
+        item !== null
+      ) {
+
+        questionText.textContent =
+          item.question ||
+          `${
+            isEnglish()
+              ? "Question"
+              : "Soalan"
+          } ${index + 1}`;
+
+
+        answerText.textContent =
+          item.answer ||
+          "-";
+
+      } else {
+
+        questionText.textContent =
+          `${
+            isEnglish()
+              ? "Question"
+              : "Soalan"
+          } ${index + 1}`;
+
+
+        answerText.textContent =
+          String(
+            item || "-"
+          );
+      }
+
+
+      answerItem.append(
+        questionText,
+        answerText
+      );
+
+
+      individualQuestionAnswers.appendChild(
+        answerItem
+      );
+    }
+  );
+}
+
+
+function displayIndividualResponse() {
+
+  if (
+    individualResponses.length === 0
+  ) {
+
+    showResponseList();
+
+    return;
+  }
+
+
+  if (
+    selectedIndividualIndex < 0
+  ) {
+
+    selectedIndividualIndex =
+      0;
+  }
+
+
+  if (
+    selectedIndividualIndex >=
+    individualResponses.length
+  ) {
+
+    selectedIndividualIndex =
+      individualResponses.length - 1;
+  }
+
+
+  const responseData =
+    individualResponses[
+      selectedIndividualIndex
+    ];
+
+
+  individualStudentSelect.value =
+    String(
+      selectedIndividualIndex
+    );
+
+
+  individualStudentName.textContent =
+    responseData.studentName ||
+    t(
+      "responses.unknownStudent",
+      "Pelajar"
+    );
+
+
+  individualStudentMatric.textContent =
+    `${t(
+      "student.matricNumber",
+      "Nombor Matrik"
+    )}: ${
+      responseData.studentMatric ||
+      "-"
+    }`;
+
+
+  individualUnderstandingBadge.textContent =
+    getUnderstandingLabel(
+      responseData.understandingLevel
+    );
+
+  individualUnderstandingBadge.dataset.level =
+    responseData.understandingLevel ||
+    "";
+
+
+  const selectedSession =
+    getSelectedSession();
+
+
+  individualStudentClass.textContent =
+    responseData.className ||
+    selectedSession?.className ||
+    "-";
+
+
+  individualSubmittedAt.textContent =
+    formatTimestamp(
+      responseData.submittedAt
+    );
+
+
+  individualUnderstoodText.textContent =
+    responseData.understoodText ||
+    "-";
+
+
+  individualNotUnderstoodText.textContent =
+    responseData.notUnderstoodText ||
+    "-";
+
+
+  renderIndividualQuestionAnswers(
+    responseData
+  );
+
+
+  responsePosition.textContent =
+    `${selectedIndividualIndex + 1} / ${
+      individualResponses.length
+    }`;
+
+
+  previousResponseBtn.disabled =
+    selectedIndividualIndex === 0;
+
+
+  nextResponseBtn.disabled =
+    selectedIndividualIndex ===
+    individualResponses.length - 1;
+}
+
+
+function openIndividualResponse(
+  responseId
+) {
+
+  prepareIndividualResponses();
+
+
+  const index =
+    individualResponses.findIndex(
+      (responseData) =>
+        responseData.id ===
+        responseId
+    );
+
+
+  selectedIndividualIndex =
+    index >= 0
+      ? index
+      : 0;
+
+
+  renderIndividualStudentOptions();
+
+
+  responseListView
+    .classList
+    .add("hidden");
+
+
+  individualResponseView
+    .classList
+    .remove("hidden");
+
+
+  displayIndividualResponse();
+
+
+  individualResponseView.scrollIntoView(
+    {
+      behavior: "smooth",
+      block: "start"
+    }
+  );
+}
+
+
+function showResponseList() {
+
+  individualResponseView
+    .classList
+    .add("hidden");
+
+
+  responseListView
+    .classList
+    .remove("hidden");
+}
+
+
+/* =========================================================
+   CSV - UTILITI
+========================================================= */
+
+function protectCsvValue(
+  value
+) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+  }
+
+
+  let text =
+    String(value);
+
+
+  /*
+    Elakkan Excel/Sheets mentafsir
+    nilai pengguna sebagai formula.
+  */
+
+  if (
+    /^[=+\-@]/.test(
+      text.trimStart()
+    )
+  ) {
+
+    text =
+      `'${text}`;
+  }
+
+
+  return text;
+}
+
+
+function csvEscape(
+  value
+) {
+
+  const text =
+    protectCsvValue(
+      value
+    );
+
+
+  return `"${text.replace(
+    /"/g,
+    '""'
+  )}"`;
+}
+
+
+function rowsToCsv(
+  rows
+) {
+
+  return rows
+    .map(
+      (row) =>
+        row
+          .map(csvEscape)
+          .join(",")
+    )
+    .join("\r\n");
+}
+
+
+function sanitiseFilename(
+  value
+) {
+
+  return String(
+    value || "session"
+  )
+    .trim()
+    .replace(
+      /[<>:"/\\|?*\u0000-\u001F]/g,
+      "-"
+    )
+    .replace(
+      /\s+/g,
+      "_"
+    )
+    .slice(
+      0,
+      80
+    ) ||
+    "session";
+}
+
+
+function downloadCsv(
+  filename,
+  rows
+) {
+
+  const csvContent =
+    "\uFEFF" +
+    rowsToCsv(
+      rows
+    );
+
+
+  const blob =
+    new Blob(
+      [csvContent],
+      {
+        type:
+          "text/csv;charset=utf-8;"
       }
     );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+  link.href =
+    url;
+
+  link.download =
+    filename;
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+
+  link.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+}
+
+
+/* =========================================================
+   CSV - SOALAN
+========================================================= */
+
+function getQuestionAnswerPair(
+  item,
+  index
+) {
+
+  if (
+    typeof item === "object" &&
+    item !== null
+  ) {
+
+    return {
+      question:
+        item.question ||
+        `${
+          isEnglish()
+            ? "Question"
+            : "Soalan"
+        } ${index + 1}`,
+
+      answer:
+        item.answer ||
+        ""
+    };
+  }
+
+
+  return {
+    question:
+      `${
+        isEnglish()
+          ? "Question"
+          : "Soalan"
+      } ${index + 1}`,
+
+    answer:
+      String(
+        item || ""
+      )
+  };
+}
+
+
+function getMaximumQuestionCount(
+  responses
+) {
+
+  return Math.max(
+    0,
+    ...responses.map(
+      (responseData) =>
+        Array.isArray(
+          responseData.questionAnswers
+        )
+          ? responseData
+              .questionAnswers
+              .length
+          : 0
+    )
+  );
+}
+
+
+/* =========================================================
+   EXPORT SEMUA RESPONS
+========================================================= */
+
+function exportAllResponses() {
+
+  const sessionData =
+    getSelectedSession();
+
+  const responses =
+    sortResponsesByStudent(
+      getSelectedSessionResponses()
+    );
+
+
+  if (
+    !sessionData ||
+    responses.length === 0
+  ) {
+
+    showMessage(
+      isEnglish()
+        ? "There are no responses to export."
+        : "Tiada respons untuk dieksport.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  clearMessage();
+
+
+  const maxQuestionCount =
+    getMaximumQuestionCount(
+      responses
+    );
+
+
+  const header =
+    [
+      isEnglish()
+        ? "No."
+        : "Bil",
+
+      isEnglish()
+        ? "Student Name"
+        : "Nama Pelajar",
+
+      isEnglish()
+        ? "Matric Number"
+        : "Nombor Matrik",
+
+      isEnglish()
+        ? "Class"
+        : "Kelas",
+
+      isEnglish()
+        ? "Course"
+        : "Kursus",
+
+      isEnglish()
+        ? "Topic"
+        : "Topik",
+
+      isEnglish()
+        ? "Session Code"
+        : "Kod Sesi",
+
+      isEnglish()
+        ? "Understanding Level"
+        : "Tahap Kefahaman",
+
+      isEnglish()
+        ? "What Was Understood"
+        : "Apa yang Difahami",
+
+      isEnglish()
+        ? "What Is Still Not Understood"
+        : "Apa yang Masih Belum Difahami"
+    ];
+
+
+  for (
+    let index = 0;
+    index < maxQuestionCount;
+    index += 1
+  ) {
+
+    header.push(
+      `${
+        isEnglish()
+          ? "Question"
+          : "Soalan"
+      } ${index + 1}`
+    );
+
+    header.push(
+      `${
+        isEnglish()
+          ? "Answer"
+          : "Jawapan"
+      } ${index + 1}`
+    );
+  }
+
+
+  header.push(
+    isEnglish()
+      ? "Submitted At"
+      : "Tarikh/Masa Hantar"
+  );
+
+
+  const course =
+    [
+      sessionData.courseCode,
+      sessionData.courseName
+    ]
+      .filter(Boolean)
+      .join(" — ");
+
+
+  const rows =
+    [header];
+
+
+  responses.forEach(
+    (
+      responseData,
+      responseIndex
+    ) => {
+
+      const row =
+        [
+          responseIndex + 1,
+          responseData.studentName || "",
+          responseData.studentMatric || "",
+          responseData.className ||
+            sessionData.className ||
+            "",
+          course,
+          sessionData.topic || "",
+          sessionData.sessionCode || "",
+          getUnderstandingLabel(
+            responseData.understandingLevel
+          ),
+          responseData.understoodText || "",
+          responseData.notUnderstoodText || ""
+        ];
+
+
+      const answers =
+        Array.isArray(
+          responseData.questionAnswers
+        )
+          ? responseData.questionAnswers
+          : [];
+
+
+      for (
+        let index = 0;
+        index < maxQuestionCount;
+        index += 1
+      ) {
+
+        if (
+          answers[index] !==
+          undefined
+        ) {
+
+          const pair =
+            getQuestionAnswerPair(
+              answers[index],
+              index
+            );
+
+
+          row.push(
+            pair.question,
+            pair.answer
+          );
+
+        } else {
+
+          row.push(
+            "",
+            ""
+          );
+        }
+      }
+
+
+      row.push(
+        formatTimestamp(
+          responseData.submittedAt
+        )
+      );
+
+
+      rows.push(
+        row
+      );
+    }
+  );
+
+
+  const filename =
+    `${
+      sanitiseFilename(
+        sessionData.sessionCode ||
+        sessionData.topic
+      )
+    }_all_responses.csv`;
+
+
+  downloadCsv(
+    filename,
+    rows
+  );
+
+
+  showMessage(
+    isEnglish()
+      ? "All responses CSV has been downloaded."
+      : "Fail CSV semua respons telah dimuat turun.",
+    "success"
+  );
+}
+
+
+/* =========================================================
+   EXPORT RINGKASAN
+========================================================= */
+
+function exportSummary() {
+
+  const sessionData =
+    getSelectedSession();
+
+  const responses =
+    sortResponsesByStudent(
+      getSelectedSessionResponses()
+    );
+
+
+  if (
+    !sessionData ||
+    responses.length === 0
+  ) {
+
+    showMessage(
+      isEnglish()
+        ? "There are no responses to summarise."
+        : "Tiada respons untuk diringkaskan.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  clearMessage();
+
+
+  const total =
+    responses.length;
+
+
+  const understood =
+    responses.filter(
+      (responseData) =>
+        responseData.understandingLevel ===
+        "faham"
+    ).length;
+
+
+  const partial =
+    responses.filter(
+      (responseData) =>
+        responseData.understandingLevel ===
+        "sebahagian"
+    ).length;
+
+
+  const notUnderstood =
+    responses.filter(
+      (responseData) =>
+        responseData.understandingLevel ===
+        "belum_faham"
+    ).length;
+
+
+  const course =
+    [
+      sessionData.courseCode,
+      sessionData.courseName
+    ]
+      .filter(Boolean)
+      .join(" — ");
+
+
+  const rows =
+    [
+      [
+        isEnglish()
+          ? "SMART EXIT TICKET - SESSION SUMMARY"
+          : "SMART EXIT TICKET - RINGKASAN SESI"
+      ],
+
+      [],
+
+      [
+        isEnglish()
+          ? "Session Information"
+          : "Maklumat Sesi"
+      ],
+
+      [
+        isEnglish()
+          ? "Course"
+          : "Kursus",
+        course
+      ],
+
+      [
+        isEnglish()
+          ? "Class"
+          : "Kelas",
+        sessionData.className || ""
+      ],
+
+      [
+        isEnglish()
+          ? "Topic"
+          : "Topik",
+        sessionData.topic || ""
+      ],
+
+      [
+        isEnglish()
+          ? "Session Code"
+          : "Kod Sesi",
+        sessionData.sessionCode || ""
+      ],
+
+      [
+        isEnglish()
+          ? "Status"
+          : "Status",
+        getStatusLabel(
+          sessionData.status
+        )
+      ],
+
+      [
+        isEnglish()
+          ? "Total Responses"
+          : "Jumlah Respons",
+        total
+      ],
+
+      [],
+
+      [
+        isEnglish()
+          ? "Understanding Summary"
+          : "Ringkasan Kefahaman"
+      ],
+
+      [
+        isEnglish()
+          ? "Level"
+          : "Tahap",
+        isEnglish()
+          ? "Number"
+          : "Bilangan",
+        isEnglish()
+          ? "Percentage"
+          : "Peratus"
+      ],
+
+      [
+        getUnderstandingLabel(
+          "faham"
+        ),
+        understood,
+        `${calculatePercentage(
+          understood,
+          total
+        )}%`
+      ],
+
+      [
+        getUnderstandingLabel(
+          "sebahagian"
+        ),
+        partial,
+        `${calculatePercentage(
+          partial,
+          total
+        )}%`
+      ],
+
+      [
+        getUnderstandingLabel(
+          "belum_faham"
+        ),
+        notUnderstood,
+        `${calculatePercentage(
+          notUnderstood,
+          total
+        )}%`
+      ],
+
+      [],
+
+      [
+        isEnglish()
+          ? "Student Summary"
+          : "Ringkasan Pelajar"
+      ],
+
+      [
+        isEnglish()
+          ? "No."
+          : "Bil",
+
+        isEnglish()
+          ? "Student Name"
+          : "Nama Pelajar",
+
+        isEnglish()
+          ? "Matric Number"
+          : "Nombor Matrik",
+
+        isEnglish()
+          ? "Understanding Level"
+          : "Tahap Kefahaman",
+
+        isEnglish()
+          ? "What Is Still Not Understood"
+          : "Apa yang Masih Belum Difahami"
+      ]
+    ];
+
+
+  responses.forEach(
+    (
+      responseData,
+      index
+    ) => {
+
+      rows.push(
+        [
+          index + 1,
+          responseData.studentName || "",
+          responseData.studentMatric || "",
+          getUnderstandingLabel(
+            responseData.understandingLevel
+          ),
+          responseData.notUnderstoodText || ""
+        ]
+      );
+    }
+  );
+
+
+  const filename =
+    `${
+      sanitiseFilename(
+        sessionData.sessionCode ||
+        sessionData.topic
+      )
+    }_summary.csv`;
+
+
+  downloadCsv(
+    filename,
+    rows
+  );
+
+
+  showMessage(
+    isEnglish()
+      ? "Summary CSV has been downloaded."
+      : "Fail CSV ringkasan telah dimuat turun.",
+    "success"
+  );
 }
 
 
@@ -1244,6 +2334,8 @@ function displaySelectedSessionAnalysis() {
     .classList
     .remove("hidden");
 
+
+  showResponseList();
 
   displaySelectedSessionInfo();
 
@@ -1450,10 +2542,6 @@ async function loadPageData(
 
   try {
 
-    /*
-      Ambil respons dan sesi.
-    */
-
     await loadLecturerResponses(
       lecturerId
     );
@@ -1531,6 +2619,10 @@ sessionSelect.addEventListener(
       "";
 
 
+    selectedIndividualIndex =
+      0;
+
+
     displaySelectedSessionAnalysis();
   }
 );
@@ -1547,6 +2639,80 @@ responseSearch.addEventListener(
 
 
 /* =========================================================
+   EVENT VIEW INDIVIDU
+========================================================= */
+
+backToResponseListBtn.addEventListener(
+  "click",
+  showResponseList
+);
+
+
+individualStudentSelect.addEventListener(
+  "change",
+  () => {
+
+    selectedIndividualIndex =
+      Number(
+        individualStudentSelect.value
+      ) || 0;
+
+
+    displayIndividualResponse();
+  }
+);
+
+
+previousResponseBtn.addEventListener(
+  "click",
+  () => {
+
+    if (
+      selectedIndividualIndex > 0
+    ) {
+
+      selectedIndividualIndex -= 1;
+
+      displayIndividualResponse();
+    }
+  }
+);
+
+
+nextResponseBtn.addEventListener(
+  "click",
+  () => {
+
+    if (
+      selectedIndividualIndex <
+      individualResponses.length - 1
+    ) {
+
+      selectedIndividualIndex += 1;
+
+      displayIndividualResponse();
+    }
+  }
+);
+
+
+/* =========================================================
+   EVENT EXPORT CSV
+========================================================= */
+
+exportAllResponsesBtn.addEventListener(
+  "click",
+  exportAllResponses
+);
+
+
+exportSummaryBtn.addEventListener(
+  "click",
+  exportSummary
+);
+
+
+/* =========================================================
    APABILA BAHASA BERUBAH
 ========================================================= */
 
@@ -1554,9 +2720,8 @@ document.addEventListener(
   "languagechange",
   () => {
 
-    /*
-      Profil.
-    */
+    updateDynamicLabels();
+
 
     if (
       currentLecturer
@@ -1567,10 +2732,6 @@ document.addEventListener(
       );
     }
 
-
-    /*
-      Dropdown sesi dijana menggunakan JS.
-    */
 
     renderSessionOptions();
 
@@ -1584,12 +2745,48 @@ document.addEventListener(
     }
 
 
-    /*
-      Status, tarikh dan kad respons
-      perlu dibina semula.
-    */
+    displaySelectedSessionInfo();
 
-    displaySelectedSessionAnalysis();
+    displayUnderstandingAnalysis();
+
+    displayNotUnderstoodSummary();
+
+    displayResponses();
+
+
+    if (
+      !individualResponseView
+        .classList
+        .contains("hidden")
+    ) {
+
+      const currentId =
+        individualResponses[
+          selectedIndividualIndex
+        ]?.id;
+
+
+      prepareIndividualResponses();
+
+
+      const updatedIndex =
+        individualResponses.findIndex(
+          (responseData) =>
+            responseData.id ===
+            currentId
+        );
+
+
+      selectedIndividualIndex =
+        updatedIndex >= 0
+          ? updatedIndex
+          : 0;
+
+
+      renderIndividualStudentOptions();
+
+      displayIndividualResponse();
+    }
   }
 );
 
@@ -1597,6 +2794,9 @@ document.addEventListener(
 /* =========================================================
    AUTHENTICATION
 ========================================================= */
+
+updateDynamicLabels();
+
 
 onAuthStateChanged(
   auth,

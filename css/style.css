@@ -3635,3 +3635,681 @@ h1 {
   display: block;
   background: transparent;
 }
+
+
+/* =========================================================
+   RESPONS & ANALISIS - COMPACT PROFESSIONAL LAYOUT
+   Digunakan bersama:
+   <body class="dashboard-body responses-page">
+========================================================= */
+
+/* Ruang utama halaman */
+.responses-page .dashboard-main {
+  padding-top: 26px;
+  padding-bottom: 36px;
+}
+
+/* Tajuk halaman */
+.responses-page .page-heading {
+  margin-bottom: 18px;
+}
+
+.responses-page .page-heading .section-label {
+  margin-bottom: 5px;
+}
+
+.responses-page .page-heading h1 {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.responses-page .page-heading p:not(.section-label) {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+
+/* Mesej sistem pada halaman respons */
+.responses-page #responseMessage.show {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Ringkasan keseluruhan */
+.responses-page .response-summary-grid {
+  grid-template-columns: repeat(2, minmax(190px, 220px));
+  gap: 14px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.responses-page .summary-card {
+  min-height: 88px;
+  padding: 16px 18px;
+  gap: 13px;
+}
+
+.responses-page .summary-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  font-size: 19px;
+}
+
+.responses-page .summary-card div:last-child {
+  gap: 3px;
+}
+
+.responses-page .summary-card span {
+  font-size: 12px;
+}
+
+.responses-page .summary-card strong {
+  font-size: 26px;
+}
+
+/* Panel utama */
+.responses-page .form-panel {
+  margin-bottom: 20px;
+  padding: 20px 24px;
+}
+
+/* Tajuk setiap seksyen */
+.responses-page .form-section-heading {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  gap: 12px;
+}
+
+.responses-page .form-section-heading h2 {
+  margin-top: 0;
+  margin-bottom: 3px;
+  font-size: 1.1rem;
+}
+
+.responses-page .form-section-heading p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.responses-page .section-number {
+  width: 34px;
+  height: 34px;
+}
+
+/* Borang pemilihan sesi */
+.responses-page .form-grid {
+  gap: 14px;
+}
+
+.responses-page .form-group {
+  gap: 6px;
+}
+
+.responses-page .form-group label {
+  margin-bottom: 0;
+}
+
+.responses-page .form-group select,
+.responses-page .form-group input,
+.responses-page .form-group textarea {
+  min-height: 46px;
+}
+
+/* Maklumat sesi */
+.responses-page .response-session-info {
+  gap: 12px;
+}
+
+.responses-page .response-session-info > div {
+  padding: 14px 15px;
+  border-radius: 12px;
+}
+
+.responses-page .response-session-info span {
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+
+.responses-page .response-session-info strong {
+  font-size: 15px;
+}
+
+/* Analisis kefahaman */
+.responses-page .understanding-analysis-grid {
+  gap: 14px;
+}
+
+.responses-page .analysis-card {
+  padding: 18px;
+  border-radius: 15px;
+}
+
+.responses-page .analysis-card > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.responses-page .analysis-card strong {
+  margin-bottom: 4px;
+  font-size: 30px;
+}
+
+.responses-page .analysis-card small {
+  font-size: 14px;
+}
+
+/* Refleksi yang belum difahami */
+.responses-page .reflection-summary-list {
+  gap: 10px;
+}
+
+.responses-page .reflection-summary-item {
+  padding: 14px 15px;
+  border-radius: 12px;
+}
+
+.responses-page .reflection-summary-item small {
+  margin-bottom: 7px;
+}
+
+.responses-page .reflection-summary-item p {
+  line-height: 1.5;
+}
+
+/* Toolbar respons */
+.responses-page .response-toolbar {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.responses-page .response-toolbar input[type="search"] {
+  min-height: 44px;
+}
+
+/* Senarai respons */
+.responses-page .responses-list {
+  gap: 14px;
+}
+
+.responses-page .response-card {
+  padding: 18px;
+  border-radius: 15px;
+}
+
+.responses-page .response-card-header {
+  gap: 14px;
+  padding-bottom: 12px;
+}
+
+.responses-page .response-card-header h3 {
+  margin-bottom: 3px;
+  font-size: 17px;
+}
+
+.responses-page .response-submitted-time {
+  margin-top: 10px;
+}
+
+/* Refleksi dalam respons individu */
+.responses-page .response-reflection-grid {
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.responses-page .response-reflection-grid > div {
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.responses-page .response-reflection-grid strong {
+  margin-bottom: 6px;
+}
+
+.responses-page .response-reflection-grid p {
+  line-height: 1.55;
+}
+
+/* Jawapan soalan pensyarah */
+.responses-page .response-question-answers {
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+.responses-page .response-question-answers > strong {
+  margin-bottom: 10px;
+}
+
+.responses-page .response-answer-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.responses-page .response-answer-item + .response-answer-item {
+  margin-top: 10px;
+}
+
+.responses-page .response-question {
+  margin-bottom: 6px;
+}
+
+.responses-page .response-answer {
+  line-height: 1.55;
+}
+
+/* Status / loading khusus halaman respons
+   Menimpa margin 70px daripada .student-status-card global */
+.responses-page #responsesLoading,
+.responses-page #noResponseSessionsPanel,
+.responses-page #noResponsesPanel,
+.responses-page #noSearchResultsPanel,
+.responses-page #noNotUnderstoodPanel {
+  max-width: none;
+  margin: 14px 0 20px;
+  padding: 24px;
+}
+
+.responses-page #responsesLoading h2,
+.responses-page #noResponseSessionsPanel h2,
+.responses-page #noResponsesPanel h3,
+.responses-page #noSearchResultsPanel h3,
+.responses-page #noNotUnderstoodPanel h3 {
+  margin: 10px 0 6px;
+}
+
+.responses-page #responsesLoading p,
+.responses-page #noResponseSessionsPanel p,
+.responses-page #noResponsesPanel p,
+.responses-page #noSearchResultsPanel p,
+.responses-page #noNotUnderstoodPanel p {
+  line-height: 1.5;
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .responses-page .response-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Telefon */
+@media (max-width: 760px) {
+  .responses-page .dashboard-main {
+    padding-top: 20px;
+    padding-bottom: 28px;
+  }
+
+  .responses-page .page-heading {
+    margin-bottom: 16px;
+  }
+
+  .responses-page .response-summary-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 16px;
+  }
+
+  .responses-page .form-panel {
+    margin-bottom: 16px;
+    padding: 18px;
+  }
+
+  .responses-page .form-section-heading {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+  }
+
+  .responses-page .response-session-info,
+  .responses-page .understanding-analysis-grid,
+  .responses-page .response-reflection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   RESPONS & ANALISIS - VIEW INDIVIDU + EXPORT CSV
+========================================================= */
+
+/* Toolbar carian + eksport */
+.responses-page .response-actions-bar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.responses-page .response-search-group {
+  min-width: 0;
+}
+
+.responses-page .response-export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.responses-page .response-export-actions .primary-button,
+.responses-page .response-export-actions .secondary-button {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+
+/* Senarai respons - ringkas */
+.responses-page .responses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.responses-page .response-list-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  border-left: 5px solid #cbd5e1;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.035);
+}
+
+.responses-page .response-list-card[data-level="faham"] {
+  border-left-color: #22c55e;
+}
+
+.responses-page .response-list-card[data-level="sebahagian"] {
+  border-left-color: #f59e0b;
+}
+
+.responses-page .response-list-card[data-level="belum_faham"] {
+  border-left-color: #ef4444;
+}
+
+.responses-page .response-list-main {
+  min-width: 0;
+}
+
+.responses-page .response-list-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.responses-page .response-list-heading h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #0f172a;
+}
+
+.responses-page .response-list-main > p {
+  margin: 0 0 5px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.responses-page .response-list-main > small {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.responses-page .response-view-button {
+  min-width: 125px;
+}
+
+
+/* Warna badge kefahaman */
+.responses-page .response-list-card[data-level="faham"]
+  .understanding-badge,
+.responses-page #individualUnderstandingBadge[data-level="faham"] {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.responses-page .response-list-card[data-level="sebahagian"]
+  .understanding-badge,
+.responses-page #individualUnderstandingBadge[data-level="sebahagian"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.responses-page .response-list-card[data-level="belum_faham"]
+  .understanding-badge,
+.responses-page #individualUnderstandingBadge[data-level="belum_faham"] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* Paparan respons individu */
+.responses-page .individual-response-view {
+  scroll-margin-top: 100px;
+}
+
+.responses-page .individual-response-toolbar {
+  display: grid;
+  grid-template-columns: auto minmax(260px, 420px);
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.responses-page .individual-student-select-group {
+  width: 100%;
+}
+
+.responses-page .individual-response-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  border-radius: 16px;
+}
+
+.responses-page .individual-response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 22px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.responses-page .individual-response-header .section-label {
+  margin-bottom: 5px;
+}
+
+.responses-page .individual-response-header h3 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.responses-page .individual-response-header p:not(.section-label) {
+  margin: 0;
+  color: #64748b;
+}
+
+.responses-page .individual-response-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px 22px 0;
+}
+
+.responses-page .individual-response-meta > div {
+  padding: 13px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.responses-page .individual-response-meta span {
+  display: block;
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.responses-page .individual-response-meta strong {
+  display: block;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.responses-page .individual-response-section {
+  margin: 16px 22px 0;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+}
+
+.responses-page .individual-response-section:last-child {
+  margin-bottom: 22px;
+}
+
+.responses-page .individual-response-section h4 {
+  margin: 0 0 9px;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.responses-page .individual-response-section > p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.responses-page #individualQuestionAnswers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.responses-page #individualQuestionAnswers
+  .response-answer-item {
+  margin: 0;
+  background: #ffffff;
+}
+
+.responses-page #individualQuestionAnswers
+  .response-answer-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.responses-page #individualQuestionAnswers
+  .response-answer-item p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.responses-page .individual-no-answer {
+  margin: 0;
+  color: #64748b;
+}
+
+
+/* Previous / position / next */
+.responses-page .individual-response-navigation {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.responses-page .individual-response-navigation
+  strong {
+  text-align: center;
+  color: #475569;
+  font-size: 14px;
+}
+
+.responses-page .individual-response-navigation
+  .secondary-button {
+  min-width: 130px;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+
+  .responses-page .response-actions-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .responses-page .response-export-actions {
+    justify-content: flex-start;
+  }
+
+  .responses-page .individual-response-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .responses-page .response-export-actions {
+    flex-direction: column;
+  }
+
+  .responses-page .response-export-actions
+    .primary-button,
+  .responses-page .response-export-actions
+    .secondary-button {
+    width: 100%;
+  }
+
+  .responses-page .response-list-card {
+    grid-template-columns: 1fr;
+  }
+
+  .responses-page .response-view-button {
+    width: 100%;
+  }
+
+  .responses-page .individual-response-header {
+    flex-direction: column;
+  }
+
+  .responses-page .individual-response-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .responses-page .individual-response-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .responses-page .individual-response-navigation
+    strong {
+    order: -1;
+  }
+
+  .responses-page .individual-response-navigation
+    .secondary-button {
+    width: 100%;
+  }
+}

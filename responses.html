@@ -2,7 +2,6 @@
 <html lang="ms">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -18,12 +17,9 @@
     rel="stylesheet"
     href="css/style.css"
   >
-
 </head>
 
-
-<body class="dashboard-body">
-
+<body class="dashboard-body responses-page">
 
   <!-- =====================================================
        TOPBAR
@@ -31,20 +27,15 @@
 
   <header class="topbar">
 
-
-    <!-- BRAND -->
-
     <a
       href="dashboard.html"
       class="brand"
     >
-
       <span class="brand-logo">
         ✓
       </span>
 
       <span>
-
         <strong data-i18n="app.name">
           Smart Exit Ticket
         </strong>
@@ -52,15 +43,9 @@
         <small data-i18n="app.lecturerPortal">
           Portal Pensyarah
         </small>
-
       </span>
-
     </a>
 
-
-    <!-- =================================================
-         LANGUAGE SWITCHER
-    ================================================== -->
 
     <div class="language-switcher">
 
@@ -88,10 +73,6 @@
 
     </div>
 
-
-    <!-- =================================================
-         PROFIL PENSYARAH
-    ================================================== -->
 
     <div class="lecturer-profile">
 
@@ -133,15 +114,9 @@
 
   <div class="dashboard-layout">
 
-
-    <!-- =================================================
-         SIDEBAR
-    ================================================== -->
-
     <aside class="sidebar">
 
       <nav class="sidebar-menu">
-
 
         <a
           href="dashboard.html"
@@ -151,7 +126,6 @@
           Dashboard
         </a>
 
-
         <a
           href="classes.html"
           class="menu-link"
@@ -159,7 +133,6 @@
         >
           Kelas Saya
         </a>
-
 
         <a
           href="create-session.html"
@@ -169,7 +142,6 @@
           Cipta Sesi
         </a>
 
-
         <a
           href="manage-sessions.html"
           class="menu-link"
@@ -177,7 +149,6 @@
         >
           Pengurusan Sesi
         </a>
-
 
         <a
           href="responses.html"
@@ -187,18 +158,12 @@
           Respons dan Analisis
         </a>
 
-
       </nav>
 
     </aside>
 
 
-    <!-- =================================================
-         MAIN CONTENT
-    ================================================== -->
-
     <main class="dashboard-main">
-
 
       <!-- =================================================
            TAJUK HALAMAN
@@ -247,7 +212,6 @@
 
       <section class="response-summary-grid">
 
-
         <article class="summary-card">
 
           <div class="summary-icon">
@@ -255,7 +219,6 @@
           </div>
 
           <div>
-
             <span data-i18n="responses.totalSessions">
               Jumlah Sesi
             </span>
@@ -263,7 +226,6 @@
             <strong id="overallSessionCount">
               0
             </strong>
-
           </div>
 
         </article>
@@ -276,7 +238,6 @@
           </div>
 
           <div>
-
             <span data-i18n="responses.totalResponses">
               Jumlah Respons
             </span>
@@ -284,17 +245,15 @@
             <strong id="overallResponseCount">
               0
             </strong>
-
           </div>
 
         </article>
-
 
       </section>
 
 
       <!-- =================================================
-           PILIH SESI
+           1. PILIH SESI
       ================================================== -->
 
       <section class="form-panel">
@@ -306,7 +265,6 @@
           </span>
 
           <div>
-
             <h2 data-i18n="responses.selectSession">
               Pilih Sesi
             </h2>
@@ -315,7 +273,6 @@
               Pilih sesi Exit Ticket untuk melihat analisis
               dan respons pelajar.
             </p>
-
           </div>
 
         </div>
@@ -406,9 +363,8 @@
         class="hidden"
       >
 
-
         <!-- ===============================================
-             MAKLUMAT SESI
+             2. MAKLUMAT SESI
         ================================================ -->
 
         <section class="form-panel">
@@ -420,7 +376,6 @@
             </span>
 
             <div>
-
               <h2 data-i18n="responses.sessionInfo">
                 Maklumat Sesi
               </h2>
@@ -428,7 +383,6 @@
               <p data-i18n="responses.sessionInfoDescription">
                 Ringkasan sesi Exit Ticket yang sedang dipilih.
               </p>
-
             </div>
 
           </div>
@@ -436,9 +390,7 @@
 
           <div class="response-session-info">
 
-
             <div>
-
               <span data-i18n="responses.topic">
                 Topik
               </span>
@@ -446,12 +398,9 @@
               <strong id="selectedSessionTopic">
                 -
               </strong>
-
             </div>
 
-
             <div>
-
               <span data-i18n="responses.class">
                 Kelas
               </span>
@@ -459,12 +408,9 @@
               <strong id="selectedSessionClass">
                 -
               </strong>
-
             </div>
 
-
             <div>
-
               <span data-i18n="responses.course">
                 Kursus
               </span>
@@ -472,12 +418,9 @@
               <strong id="selectedSessionCourse">
                 -
               </strong>
-
             </div>
 
-
             <div>
-
               <span data-i18n="responses.sessionCode">
                 Kod Sesi
               </span>
@@ -485,12 +428,9 @@
               <strong id="selectedSessionCode">
                 -
               </strong>
-
             </div>
 
-
             <div>
-
               <span data-i18n="common.status">
                 Status
               </span>
@@ -498,12 +438,9 @@
               <strong id="selectedSessionStatus">
                 -
               </strong>
-
             </div>
 
-
             <div>
-
               <span data-i18n="responses.totalResponses">
                 Jumlah Respons
               </span>
@@ -511,9 +448,7 @@
               <strong id="selectedSessionResponseCount">
                 0
               </strong>
-
             </div>
-
 
           </div>
 
@@ -521,7 +456,7 @@
 
 
         <!-- ===============================================
-             ANALISIS TAHAP KEFAHAMAN
+             3. ANALISIS TAHAP KEFAHAMAN
         ================================================ -->
 
         <section class="form-panel">
@@ -533,7 +468,6 @@
             </span>
 
             <div>
-
               <h2 data-i18n="responses.analysis">
                 Analisis Tahap Kefahaman
               </h2>
@@ -542,7 +476,6 @@
                 Ringkasan tahap kefahaman berdasarkan
                 respons pelajar.
               </p>
-
             </div>
 
           </div>
@@ -550,11 +483,7 @@
 
           <div class="understanding-analysis-grid">
 
-
-            <!-- FAHAM -->
-
             <article class="analysis-card">
-
               <span data-i18n="responses.understand">
                 Faham
               </span>
@@ -566,14 +495,10 @@
               <small id="understandPercentage">
                 0%
               </small>
-
             </article>
 
 
-            <!-- SEBAHAGIAN -->
-
             <article class="analysis-card">
-
               <span data-i18n="responses.partial">
                 Faham Sebahagian
               </span>
@@ -585,14 +510,10 @@
               <small id="partialPercentage">
                 0%
               </small>
-
             </article>
 
 
-            <!-- BELUM FAHAM -->
-
             <article class="analysis-card">
-
               <span data-i18n="responses.notUnderstand">
                 Belum Faham
               </span>
@@ -604,9 +525,7 @@
               <small id="notUnderstandPercentage">
                 0%
               </small>
-
             </article>
-
 
           </div>
 
@@ -614,7 +533,7 @@
 
 
         <!-- ===============================================
-             PERKARA YANG BELUM DIFAHAMI
+             4. PERKARA YANG BELUM DIFAHAMI
         ================================================ -->
 
         <section class="form-panel">
@@ -626,7 +545,6 @@
             </span>
 
             <div>
-
               <h2 data-i18n="responses.notUnderstood">
                 Perkara yang Masih Belum Difahami
               </h2>
@@ -635,7 +553,6 @@
                 Refleksi pelajar tentang perkara
                 yang masih memerlukan penjelasan.
               </p>
-
             </div>
 
           </div>
@@ -672,7 +589,7 @@
 
 
         <!-- ===============================================
-             RESPONS PELAJAR
+             5. RESPONS PELAJAR
         ================================================ -->
 
         <section class="form-panel">
@@ -684,7 +601,6 @@
             </span>
 
             <div>
-
               <h2 data-i18n="responses.studentResponses">
                 Respons Pelajar
               </h2>
@@ -693,92 +609,272 @@
                 Lihat jawapan individu yang dihantar
                 oleh pelajar.
               </p>
-
             </div>
 
           </div>
 
 
-          <!-- TOOLBAR -->
+          <!-- ===========================================
+               PAPARAN SENARAI
+          ============================================ -->
 
-          <div class="response-toolbar">
+          <div id="responseListView">
 
-            <div class="form-group">
+            <div class="response-actions-bar">
 
-              <label
-                for="responseSearch"
-                data-i18n="responses.searchStudent"
+              <div class="form-group response-search-group">
+
+                <label
+                  for="responseSearch"
+                  data-i18n="responses.searchStudent"
+                >
+                  Cari Pelajar
+                </label>
+
+                <input
+                  type="search"
+                  id="responseSearch"
+                  placeholder="Cari nama atau nombor matrik..."
+                  data-i18n-placeholder="responses.searchPlaceholder"
+                  autocomplete="off"
+                >
+
+              </div>
+
+
+              <div class="response-export-actions">
+
+                <button
+                  type="button"
+                  id="exportAllResponsesBtn"
+                  class="secondary-button"
+                >
+                  Eksport Semua Respons (CSV)
+                </button>
+
+                <button
+                  type="button"
+                  id="exportSummaryBtn"
+                  class="primary-button"
+                >
+                  Eksport Ringkasan (CSV)
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div
+              id="noResponsesPanel"
+              class="student-status-card hidden"
+            >
+
+              <div class="status-icon">
+                R
+              </div>
+
+              <h3 data-i18n="responses.noResponses">
+                Belum ada respons
+              </h3>
+
+              <p data-i18n="responses.noResponsesDescription">
+                Belum ada pelajar menghantar Exit Ticket
+                untuk sesi ini.
+              </p>
+
+            </div>
+
+
+            <div
+              id="noSearchResultsPanel"
+              class="student-status-card hidden"
+            >
+
+              <div class="status-icon">
+                ?
+              </div>
+
+              <h3 data-i18n="responses.noSearchResults">
+                Tiada pelajar ditemui
+              </h3>
+
+              <p data-i18n="responses.noSearchResultsDescription">
+                Tiada respons yang sepadan dengan carian anda.
+              </p>
+
+            </div>
+
+
+            <div
+              id="responsesList"
+              class="responses-list"
+            >
+            </div>
+
+          </div>
+
+
+          <!-- ===========================================
+               PAPARAN RESPONS INDIVIDU
+          ============================================ -->
+
+          <div
+            id="individualResponseView"
+            class="individual-response-view hidden"
+          >
+
+            <div class="individual-response-toolbar">
+
+              <button
+                type="button"
+                id="backToResponseListBtn"
+                class="secondary-button"
               >
-                Cari Pelajar
-              </label>
+                ← Kembali ke Senarai
+              </button>
 
-              <input
-                type="search"
-                id="responseSearch"
-                placeholder="Cari nama atau nombor matrik..."
-                data-i18n-placeholder="responses.searchPlaceholder"
+
+              <div class="form-group individual-student-select-group">
+
+                <label for="individualStudentSelect">
+                  Pilih Pelajar
+                </label>
+
+                <select id="individualStudentSelect">
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <article
+              id="individualResponseCard"
+              class="individual-response-card"
+            >
+
+              <div class="individual-response-header">
+
+                <div>
+                  <p
+                    id="individualResponseEyebrow"
+                    class="section-label"
+                  >
+                    RESPONS INDIVIDU
+                  </p>
+
+                  <h3 id="individualStudentName">
+                    -
+                  </h3>
+
+                  <p id="individualStudentMatric">
+                    -
+                  </p>
+                </div>
+
+                <span
+                  id="individualUnderstandingBadge"
+                  class="understanding-badge"
+                >
+                  -
+                </span>
+
+              </div>
+
+
+              <div class="individual-response-meta">
+
+                <div>
+                  <span id="individualClassLabel">
+                    Kelas
+                  </span>
+
+                  <strong id="individualStudentClass">
+                    -
+                  </strong>
+                </div>
+
+                <div>
+                  <span id="individualSubmittedLabel">
+                    Dihantar
+                  </span>
+
+                  <strong id="individualSubmittedAt">
+                    -
+                  </strong>
+                </div>
+
+              </div>
+
+
+              <div class="individual-response-section">
+
+                <h4 id="individualUnderstoodTitle">
+                  Apa yang telah difahami
+                </h4>
+
+                <p id="individualUnderstoodText">
+                  -
+                </p>
+
+              </div>
+
+
+              <div class="individual-response-section">
+
+                <h4 id="individualNotUnderstoodTitle">
+                  Apa yang masih belum difahami
+                </h4>
+
+                <p id="individualNotUnderstoodText">
+                  -
+                </p>
+
+              </div>
+
+
+              <div class="individual-response-section">
+
+                <h4 id="individualQuestionAnswersTitle">
+                  Jawapan Soalan
+                </h4>
+
+                <div id="individualQuestionAnswers">
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <div class="individual-response-navigation">
+
+              <button
+                type="button"
+                id="previousResponseBtn"
+                class="secondary-button"
               >
+                ← Sebelumnya
+              </button>
+
+              <strong id="responsePosition">
+                0 / 0
+              </strong>
+
+              <button
+                type="button"
+                id="nextResponseBtn"
+                class="secondary-button"
+              >
+                Seterusnya →
+              </button>
 
             </div>
 
-          </div>
-
-
-          <!-- TIADA RESPONS -->
-
-          <div
-            id="noResponsesPanel"
-            class="student-status-card hidden"
-          >
-
-            <div class="status-icon">
-              R
-            </div>
-
-            <h3 data-i18n="responses.noResponses">
-              Belum ada respons
-            </h3>
-
-            <p data-i18n="responses.noResponsesDescription">
-              Belum ada pelajar menghantar Exit Ticket
-              untuk sesi ini.
-            </p>
-
-          </div>
-
-
-          <!-- TIADA HASIL CARIAN -->
-
-          <div
-            id="noSearchResultsPanel"
-            class="student-status-card hidden"
-          >
-
-            <div class="status-icon">
-              ?
-            </div>
-
-            <h3 data-i18n="responses.noSearchResults">
-              Tiada pelajar ditemui
-            </h3>
-
-            <p data-i18n="responses.noSearchResultsDescription">
-              Tiada respons yang sepadan dengan carian anda.
-            </p>
-
-          </div>
-
-
-          <!-- SENARAI RESPONS -->
-
-          <div
-            id="responsesList"
-            class="responses-list"
-          >
           </div>
 
         </section>
-
 
       </div>
 
@@ -811,7 +907,5 @@
 
   </script>
 
-
 </body>
-
 </html>
